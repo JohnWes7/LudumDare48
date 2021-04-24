@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class Config : MonoBehaviour
 {
-    static string HoriString = "Horizontal";
+    public static string HoriString { get; } = "Horizontal";
+    public static string VerString { get; } = "Vertical";
 }
