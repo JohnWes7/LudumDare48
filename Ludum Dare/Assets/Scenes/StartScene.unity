@@ -5361,10 +5361,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CoursePanel
       objectReference: {fileID: 0}
-    - target: {fileID: 3424557916998848697, guid: 2a929ed3f4285184aade5be536dc15e8, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7789810231487721591, guid: 2a929ed3f4285184aade5be536dc15e8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
