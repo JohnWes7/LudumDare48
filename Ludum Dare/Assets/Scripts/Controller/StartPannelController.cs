@@ -11,4 +11,9 @@ public class StartPannelController : MonoBehaviour
     {
         Instantiate<GameObject>(GameManager, Vector3.zero, Quaternion.identity);
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

@@ -11,7 +11,7 @@ public class ExitController : MonoBehaviour
         //如果player到达终点就下一关
         if (collision.tag == "Player")
         {
-            GameManager.Instance.StartNextLevel();
+            GameManager.Instance.StartChangeToNextLevel();
         }
         Debug.Log(collision.tag);
     }

@@ -1,0 +1,79 @@
+[
+    {
+        "Id": 0,
+        "Eventtitle": "小小的惊喜#Little surprise",
+        "Desciption": "你找到了一些散落的电池。不多，但是能撑一会儿。#You find some batteries left behind.Not many,but these'll last for a while",
+        "Choice1": "好耶！！！#Nice!!!",
+        "Choice1Change": "5#0",
+        "Choice2": "",
+        "Choice2Change": "",
+        "Choice3": "",
+        "Choice3Change": ""
+    },
+    {
+        "Id": 1,
+        "Eventtitle": "些许安慰#Some comfort",
+        "Desciption": "你找到了一些零件，很幸运其中有一些你能用的#You find some parts, and you're lucky you can use some of them",
+        "Choice1": "舒服了#Comfortable",
+        "Choice1Change": "2#0",
+        "Choice2": "",
+        "Choice2Change": "",
+        "Choice3": "",
+        "Choice3Change": ""
+    },
+    {
+        "Id": 2,
+        "Eventtitle": "不可避免的老化#Inevitable aging",
+        "Desciption": "老化是每个机器人不可避免的过程#Aging is an inevitable process for every robot",
+        "Choice1": "我会变成一艘忒修斯之船吗#Will I become a ship of Theseus",
+        "Choice1Change": "-4#0",
+        "Choice2": "",
+        "Choice2Change": "",
+        "Choice3": "",
+        "Choice3Change": ""
+    },
+    {
+        "Id": 3,
+        "Eventtitle": "老旧的电池#Old batteries",
+        "Desciption": "你找到了一个包装得很好的电池盒，可惜里面的电池保存得不好#You find a nicely packaged battery case, but the battery inside is not very well preserved",
+        "Choice1": "至少它们还有电#At least they have electricity",
+        "Choice1Change": "-4#5",
+        "Choice2": "最好离这些危险品远一点#It's better to stay away from this dangerous stuff",
+        "Choice2Change": "",
+        "Choice3": "",
+        "Choice3Change": ""
+    },
+    {
+        "Id": 4,
+        "Eventtitle": "修理站#Repair station",
+        "Desciption": "这个小修理站还能工作，如果有能量输入的话#The small repair depot is still operational, if there is an energy input",
+        "Choice1": "磨刀不误砍柴工#Whet the knife and cut wood",
+        "Choice1Change": "8#-8",
+        "Choice2": "宝贵的能量应该用来探索#Precious energy should be used for exploration",
+        "Choice2Change": "",
+        "Choice3": "",
+        "Choice3Change": ""
+    },
+    {
+        "Id": 5,
+        "Eventtitle": "军用修理站#Military repair station",
+        "Desciption": "这座军事级修理站可以轻易修理你，但它所需要的能源也是军事级的#This legacy military repair station can easily repair you, but it also requires military-grade power to start",
+        "Choice1": "花费巨大，但值得#The costs are huge, and so are the benefits",
+        "Choice1Change": "30#40",
+        "Choice2": "我可不是军用机器人#I'm not a military robot",
+        "Choice2Change": "",
+        "Choice3": "",
+        "Choice3Change": ""
+    },
+    {
+        "Id": 6,
+        "Eventtitle": "变异动物袭击#Mutant animals attack",
+        "Desciption": "一群变异动物被你落下的声音惊醒，还把你误认为了入侵者#A group of mutant animals wake up to the sound of your fall, mistaking you for an intruder",
+        "Choice1": "把照明设备开到最大来吓退它们#Turn the lights on at full power to scare them away",
+        "Choice1Change": "0#-2",
+        "Choice2": "尼给路打哟#Run fast!",
+        "Choice2Change": "-2#-2",
+        "Choice3": "",
+        "Choice3Change": ""
+    }
+]

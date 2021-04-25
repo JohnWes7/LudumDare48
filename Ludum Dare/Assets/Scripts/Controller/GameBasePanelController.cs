@@ -151,9 +151,9 @@ public class GameBasePanelController : MonoBehaviour
         EnergyText.text = energy.ToString();    //更改文字
     }
 
-    public void UpdateLevel(int level)
+    public void UpdateDay(int day)
     {
-        RoundAmoungText.text = level.ToString();
+        RoundAmoungText.text = day.ToString();
     }
 
     IEnumerator AddHp(int hp)

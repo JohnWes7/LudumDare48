@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 184163662}
   m_Layer: 5
-  m_Name: Level
+  m_Name: Day
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 361, y: 372}
+  m_AnchoredPosition: {x: 400, y: 372}
   m_SizeDelta: {x: 380, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &417273581
@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 1596532613}
   - component: {fileID: 1596532612}
   m_Layer: 5
-  m_Name: LevelText
+  m_Name: DayText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,7 +194,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Level : '
+  m_Text: 'Day : '
 --- !u!1 &5068600664158186868
 GameObject:
   m_ObjectHideFlags: 0
