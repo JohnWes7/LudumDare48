@@ -36,14 +36,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        //跳跃
-        {
-            if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
-            {
-                isPressJump = true;
-            }
-        }
-
         MoveForUpdate();
 
     }
@@ -59,6 +51,14 @@ public class PlayerController : MonoBehaviour
 
     private void MoveForUpdate()
     {
+        //跳跃
+        {
+            if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
+            {
+                isPressJump = true;
+            }
+        }
+
         //取得移动变量
         Horizontal = Input.GetAxisRaw(Config.HoriString);
         Vertical = Input.GetAxisRaw(Config.VerString);
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
         //设置动画
         mAnimator.SetFloat(Config.HoriString, Mathf.Abs(Horizontal));
         mAnimator.SetFloat(Config.VerString, mRigibody.velocity.y);
-        mAnimator.SetBool("isJump", isJump);
+        mAnimator.SetBool("isJump", !isOnGround);
 
         //反转
         if (Horizontal != 0)
