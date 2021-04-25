@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class StartPannelController : MonoBehaviour
 {
+    public GameObject GameManager;
+
     public void StartPannelCallback()
     {
-        SceneManager.LoadScene("GameScene");
+        Instantiate<GameObject>(GameManager, Vector3.zero, Quaternion.identity);
     }
 }
