@@ -8,7 +8,7 @@ public class EventInfoManager : Single<EventInfoManager>
     /// <summary>
     /// 存有所有事件数据的列表
     /// </summary>
-    public List<EventInfo> EventInfoList;
+    public List<EventInfo> EventInfoList { get; }
 
     public EventInfoManager()
     {
@@ -22,9 +22,9 @@ public class EventInfoManager : Single<EventInfoManager>
 
         //for (int i = 0; i < EventInfoList.Count; i++)
         //{
-        //    Debug.Log("Id:" + EventInfoList[i].Id + " Eventtitle:" + EventInfoList[i].Eventtitle + " Desciption:" + EventInfoList[i].Desciption + " Choice1:" + EventInfoList[i].Choice1 + " Choice1Change:" + EventInfoList[i].Choice1Change + " Choice2:"
+        //    Debug.Log("Id:" + EventInfoList[i].Id + " Eventtitle:" + EventInfoList[i].Eventtitle + " Desciption:" + EventInfoList[i].Desciption + " Icon:" + EventInfoList[i].Icon + " Precondition:" + EventInfoList[i].Precondition + " Choice1:" + EventInfoList[i].Choice1 + " Choice1Change:" + EventInfoList[i].Choice1Change + " Choice2:"
         //        + EventInfoList[i].Choice2 + " Choice2Change:" + EventInfoList[i].Choice2Change + " Choice3:" + EventInfoList[i].Choice3 + " Choice3Change:" + EventInfoList[i].Choice3Change);
-        //} 
+        //}
         #endregion
 
     }
@@ -37,6 +37,8 @@ public class EventInfo
     public int Id;
     public string Eventtitle;
     public string Desciption;
+    public string Icon;
+    public int Precondition;
     public string Choice1;
     public string Choice1Change;
     public string Choice2;

@@ -123,7 +123,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2332732139466553054}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 385603587410234555}
+        m_TargetAssemblyTypeName: StartPannelController, Assembly-CSharp
+        m_MethodName: Course
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1362322289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,7 +273,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2332732139539084887}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 385603587410234555}
+        m_TargetAssemblyTypeName: StartPannelController, Assembly-CSharp
+        m_MethodName: Options
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2099129863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -520,6 +544,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameManager: {fileID: 5676310944636399721, guid: 93e685ae282491e4e9e67cfa8096a992, type: 3}
+  CoursePanelPrefab: {fileID: 3424557916998848697, guid: 2a929ed3f4285184aade5be536dc15e8, type: 3}
+  OptionsPanelPrefab: {fileID: 7738895565881228696, guid: 7a40271634747c2469beefd61fd1f123, type: 3}
 --- !u!1 &2332732140372617883
 GameObject:
   m_ObjectHideFlags: 0

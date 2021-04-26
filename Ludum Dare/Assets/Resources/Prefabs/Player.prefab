@@ -180,6 +180,8 @@ MonoBehaviour:
   isJump: 0
   isPressJump: 0
   isOnGround: 0
+  SelectEvent: {fileID: 0}
+  ESCPanel: {fileID: 0}
 --- !u!70 &2095109818
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

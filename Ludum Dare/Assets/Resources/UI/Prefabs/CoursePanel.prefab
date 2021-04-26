@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7803662843252194042}
   - component: {fileID: 64580279496259838}
   - component: {fileID: 571881943786418292}
+  - component: {fileID: 8930988100223082206}
   m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
@@ -73,7 +74,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 5
     m_MaxSize: 80
-    m_Alignment: 0
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -122,7 +123,33 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 64580279496259838}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4118654785754499591}
+        m_TargetAssemblyTypeName: CoursePanelController, Assembly-CSharp
+        m_MethodName: Back
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8930988100223082206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741052525122464024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14c73f0d3a8cd6e44930545bc3969764, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsOnButtom: 0
+  IsDown: 0
 --- !u!1 &3336916365246426017
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,8 +184,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -450}
-  m_SizeDelta: {x: -450, y: 600}
+  m_AnchoredPosition: {x: 0, y: -563.6}
+  m_SizeDelta: {x: -450, y: 827.167}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &811227311987003995
 CanvasRenderer:
@@ -201,18 +228,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'In this age without human beings
-
-
-    You go down to the earth in search
-    of the heritage of human
-
-
-    Pay attention to maintaining your durability and
-    energy
-
-
-    And find as many relics as you can'
+  m_Text: "In this age without human beings\nYou go down to the earth in search of
+    the heritage of human\nPay attention to maintaining your durability and energy\nAnd
+    find as many relics as you can\n\nWASD \u79FB\u52A8 E\u548C\u4E8B\u4EF6\u4EA4\u4E92
+    \u6BCF\u5929\u5B8C\u6210\u6240\u6709\u4EA4\u4E92\u624D\u80FD\u7EE7\u7EED\n\n\u6240\u4EE5\u4E0D\u65AD\u5F80\u4E0B\u63A2\u7D22\u53BB\u53D1\u73B0\u65B0\u7684\u4E8B\u4EF6\u5427\uFF01\uFF01\n\nFall
+    into endness!"
 --- !u!1 &3424557916998848697
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,6 +244,7 @@ GameObject:
   - component: {fileID: 7789810231487721591}
   - component: {fileID: 4600147153024773165}
   - component: {fileID: 3533278119023895332}
+  - component: {fileID: 4118654785754499591}
   m_Layer: 5
   m_Name: CoursePanel
   m_TagString: Untagged
@@ -290,3 +311,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4118654785754499591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3424557916998848697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6940bf35f29447f45ad9b77b0ee0e97d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

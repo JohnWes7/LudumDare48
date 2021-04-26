@@ -6,6 +6,9 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using DG.Tweening;
 
+/// <summary>
+/// 主要负责跳转场景，以及动画
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; set; }
@@ -13,21 +16,28 @@ public class GameManager : MonoBehaviour
     [Header("自我组件")]
     //public Animator mAnimator;
     public Image ChangePanel;
-    public Text Day;
+    public Text DayText;
 
     [Header("动画参数")]
     public float StartDuring = 1f;
     public float EndDuring = 1f;
     public GameObject mCanvas;
 
-    [Header("基本信息")]
+    [Header("玩家基本信息")]
     [SerializeField,Tooltip("统计天数（关卡）")]
     int GameDay;
     public int Hp;
     public int Energy;
+    public int Score;
+    public List<int> ExpEventsList;
+    public List<int> ItemIDList;
+    [SerializeField]
+    private bool isDead = false;
 
-    [Header("ESC")]
-    public GameObject ESCPanel;
+    [Header("异步")]
+    public AsyncOperation asyncOperation;
+
+
 
 
     private void Start()
@@ -56,30 +66,37 @@ public class GameManager : MonoBehaviour
         
     }
 
-    private void Update()
-    {
-        ESCPart();
-    }
 
     #region 动画相关
 
-    private void BeginFadeAni(TweenCallback callback, string laber)
+    public void BeginFadeAni(TweenCallback callback, string laber)
     {
+        //如果已经有人在转场景了就取消这一次的
+        if (asyncOperation != null)
+        {
+            return;
+        }
+
         //打开
         mCanvas.SetActive(true);
 
+        ChangePanel.DOKill(true);
+
         //跳转场景前
         ChangePanel.DOFade(1, StartDuring).OnComplete(callback);
-        Day.DOFade(1, StartDuring);
-        Day.text = "";
-        Day.DOText(laber, StartDuring).SetEase(Ease.Linear);
+        DayText.DOFade(1, StartDuring);
+        DayText.text = "";
+        DayText.DOText(laber, StartDuring).SetEase(Ease.Linear);
     }
 
     /// <summary>
     /// 结束fade动画
     /// </summary>
-    private void EndFadeAni(TweenCallback callback = null)
+    public void EndFadeAni(TweenCallback callback = null)
     {
+
+        ChangePanel.DOKill(true);
+
         //跳转场景后
         if (callback == null)
         {
@@ -90,12 +107,10 @@ public class GameManager : MonoBehaviour
             ChangePanel.DOFade(0, EndDuring).OnComplete(callback);
         }
 
-        Day.DOFade(0, EndDuring).OnComplete(() => { mCanvas.SetActive(false); });
+        DayText.DOFade(0, EndDuring).OnComplete(() => { mCanvas.SetActive(false);  });
     }
 
     #endregion
-
-
 
     /// <summary>
     /// 第一天初始化函数
@@ -105,14 +120,19 @@ public class GameManager : MonoBehaviour
         //初始数值
         Hp = 100;
         Energy = 100;
+        Score = 0;
+        ExpEventsList = new List<int>();
+        ItemIDList = new List<int>();
 
         //拿初始数值更新UI
         GameBasePanelController cbpc = GameObject.Find("Canvas/GameBasePanel").GetComponent<GameBasePanelController>();
         cbpc.UpdateHp(Hp, true);
         cbpc.UpdateEnergy(Energy, true);
         cbpc.UpdateDay(GameDay);
+        cbpc.UpdateItems(ItemIDList);
     }
 
+    //之后天数
     public void StartChangeToNextLevel()
     {
         //天数变化
@@ -128,14 +148,19 @@ public class GameManager : MonoBehaviour
                 //完成跳转回调
                 //结束动画
                 EndFadeAni();
-                
 
+                //减少energy
+                ChangeEnery(-5);
+
+                //更新UI显示
+                GameBasePanelController cbpc = GameObject.Find("Canvas/GameBasePanel").GetComponent<GameBasePanelController>();
+                cbpc.UpdateDay(GameDay);
+                cbpc.UpdateItems(ItemIDList);
+                cbpc.UpdateHp(Hp, true);
             });
 
         }, laber);
     }
-
-    
 
     /// <summary>
     /// 开始异步加载场景
@@ -147,8 +172,6 @@ public class GameManager : MonoBehaviour
         StartCoroutine(AsyncLoadSence(sceneName, unityAction));
     }
 
-    
-
     /// <summary>
     /// 异步加载场景
     /// </summary>
@@ -158,51 +181,150 @@ public class GameManager : MonoBehaviour
     public IEnumerator AsyncLoadSence(string sceneName, UnityAction unityAction)
     {
         //携程换场景
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName);
+        asyncOperation = SceneManager.LoadSceneAsync(sceneName);
         yield return asyncOperation;
+
+        asyncOperation = null;
 
         //执行回调函数
         unityAction.Invoke();
     }
 
 
-    #region ESC弹窗系统
 
-    private void ESCPart()
+
+    public void ChangeEnery(int deltaEnergy)
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        //更改数值
+        this.Energy = Mathf.Clamp(this.Energy + deltaEnergy, 0, 100);
+
+        //更新ui显示
+        GameBasePanelController cbpc = GameObject.Find("Canvas/GameBasePanel").GetComponent<GameBasePanelController>();
+        cbpc.UpdateEnergy(this.Energy);
+
+        if (this.Energy <= 0)
         {
-            if (ESCPanel == null)
-            {
-                //生成
-                GameObject esc = Resources.Load<GameObject>(Config.ESCPanelPath);
-                ESCPanel = Instantiate<GameObject>(esc, GameObject.Find("Canvas").transform);
-            }
-            else
-            {
-                Destroy(ESCPanel);
-                ESCPanel = null;
-            }
+            Dead();
         }
     }
 
-    public void ESCYesCallBack()
+    public void ChangeHp(int deltaHp)
     {
-        string laber = "Going Back...";
-        BeginFadeAni(() => {
+        //更改数值
+        this.Hp = Mathf.Clamp(this.Hp + deltaHp, 0, 100);
 
-            //完成开始动画后进行场景跳转
-            BeginAsyncLoadSence(Config.StartSceneName, () => {
+        //更新ui显示
+        GameBasePanelController cbpc = GameObject.Find("Canvas/GameBasePanel").GetComponent<GameBasePanelController>();
+        cbpc.UpdateHp(this.Hp);
 
-                //完成跳转回调
-                //结束动画
-                EndFadeAni(() => { Destroy(gameObject); });
-            });
-
-        }, laber);
+        if (this.Hp <= 0)
+        {
+            Dead();
+        }
     }
 
-    #endregion
+    public void AddExpEvents(int event_Id)
+    {
+        ExpEventsList.Add(event_Id);
+    }
+
+    public void ChangeItemList(int item_change)
+    {
+        if (item_change == 0)
+        {
+            return;
+        }
+        else if (item_change < 0 )
+        {
+            ItemIDList.Remove(Mathf.Abs(item_change));
+        }
+        else if (item_change > 0)
+        {
+            ItemIDList.Add(item_change);
+        }
+
+        //更新显示
+        GameBasePanelController cbpc = GameObject.Find("Canvas/GameBasePanel").GetComponent<GameBasePanelController>();
+        cbpc.UpdateItems(ItemIDList);
+
+    }
+
+    public bool TryEvent(int event_id)
+    {
+        
+        EventInfo eventInfo = EventInfoManager.Instance.EventInfoList[event_id];
+
+        //如果是0代表可重复出现
+        if (eventInfo.Precondition == 0)
+        {
+            return true;
+        }
+        else
+        {
+            //如果这个事件之前出现过，就false
+            bool judge1 = !ExpEventsList.Contains(event_id);
+            bool judge2 = true;
+
+            //如果是 需要条件 的 非开头 事件链 则判断满不满足
+            if (eventInfo.Precondition > 0)
+            {
+                //如果没有满足这个的条件，false
+                judge2 = ItemIDList.Contains(eventInfo.Precondition);
+            }
+            
+
+            return judge1 && judge2;
+        }
+
+        return false;
+    }
 
 
+    private void Dead()
+    {
+        if (isDead)
+        {
+            return;
+        }
+        else
+        {
+            Debug.Log("dead");
+            isDead = true;
+
+            //人物不能移动
+            if (PlayerController.Instance)
+            {
+                PlayerController.Instance.enabled = false;
+            }
+            
+            //跳转场景到end
+            BeginFadeAni(() =>
+            {
+                BeginAsyncLoadSence("EndScene", () =>
+                {
+                    //结束动画
+                    EndFadeAni();
+
+                    //计算分数
+                    for (int i = 0; i < ItemIDList.Count; i++)
+                    {
+                        ItemInfo info = ItemInfoManager.Instance.Get(ItemIDList[i]);
+                        this.Score += info.Score * 50;
+                    }
+                    this.Score += this.GameDay * 10;
+
+                    //刷新页面
+                    GameObject.Find("EndPanel").GetComponent<EndPanelController>().UpdateEndView(this.Score, this.GameDay);
+
+                });
+
+            }, "End...");
+        }
+    }
+
+    public void DestroySelf()
+    {
+        GameManager.Instance = null;
+        Destroy(gameObject);
+    }
 }

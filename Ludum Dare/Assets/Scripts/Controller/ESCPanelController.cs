@@ -6,11 +6,12 @@ public class ESCPanelController : MonoBehaviour
 {
     public void ESCYes()
     {
-        GameManager.Instance.ESCYesCallBack();
+        PlayerController.Instance.ESCYesCallBack();
     }
 
     public void ESCNo()
     {
         Destroy(gameObject);
+        PlayerController.Instance.OnECSPanelClose();
     }
 }

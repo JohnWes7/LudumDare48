@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,9 +22,13 @@ public class GameBasePanelController : MonoBehaviour
     public int shakeStrength = 30;
     public int shakeVibrato = 30;
 
-
     [Header("更新round显示")]
     public Text RoundAmoungText;
+
+    [Header("更新遗物")]
+    public GameObject itemPrefab;
+    public Transform context;
+    public List<GameObject> mItemsList = new List<GameObject>();
 
     #region TestUpdateHp
     //public int testhp;
@@ -65,7 +70,6 @@ public class GameBasePanelController : MonoBehaviour
     //    Debug.Log("1111");
     //}
     #endregion
-
     public static GameBasePanelController Instance { get; set; }
 
     private void Awake()
@@ -156,6 +160,42 @@ public class GameBasePanelController : MonoBehaviour
         RoundAmoungText.text = day.ToString();
     }
 
+    public void UpdateItems(List<int> ManagerItemIDList)
+    {
+        //清除上次的显示
+        for (int i = 0; i < mItemsList.Count; i++)
+        {
+            Destroy(mItemsList[i]);
+        }
+        mItemsList.Clear();
+
+        for (int i = 0; i < ManagerItemIDList.Count; i++)
+        {
+            GameObject item = Instantiate<GameObject>(itemPrefab, context);
+            mItemsList.Add(item);
+
+            //读表
+            ItemInfo itemInfo = ItemInfoManager.Instance.Get(ManagerItemIDList[i]);
+
+            //加载图片
+            string path = Config.ItemIconPath + itemInfo.Icon;
+            //Debug.Log(path);
+            Sprite sprite = Resources.Load<Sprite>(path);
+
+            //初始化
+            item.name = "item_" + ManagerItemIDList[i];
+            if (sprite)
+            {
+                item.GetComponent<Image>().sprite = sprite;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 动画
+    /// </summary>
+    /// <param name="hp">EndValue</param>
+    /// <returns></returns>
     IEnumerator AddHp(int hp)
     {
         for (int i = 0; i < LerpTimes; i++)

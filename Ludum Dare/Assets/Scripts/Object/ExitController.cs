@@ -13,7 +13,6 @@ public class ExitController : MonoBehaviour
         {
             GameManager.Instance.StartChangeToNextLevel();
         }
-        Debug.Log(collision.tag);
     }
 
 }

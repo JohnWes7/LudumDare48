@@ -45,14 +45,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChangePanel: {fileID: 8969241939624357716}
-  Day: {fileID: 887419840936906814}
+  DayText: {fileID: 887419840936906814}
   StartDuring: 1
   EndDuring: 1
   mCanvas: {fileID: 8962316016668728246}
   GameDay: 0
   Hp: 100
   Energy: 100
-  ESCPanel: {fileID: 0}
+  Score: 0
+  ExpEventsList: 
+  ItemIDList: 
+  isDead: 0
 --- !u!1 &8962316016668728246
 GameObject:
   m_ObjectHideFlags: 0
