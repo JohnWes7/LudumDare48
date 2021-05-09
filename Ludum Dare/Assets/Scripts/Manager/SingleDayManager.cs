@@ -28,7 +28,8 @@ public class SingleDayManager : MonoBehaviour
     private void Start()
     {
         //一开始直接生成？或者要manager来调用
-        GenerateEvent();
+        //GenerateEvent();
+        
     }
 
     //负责生成事件

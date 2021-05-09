@@ -28,9 +28,9 @@ public class ItemInfoManager : Single<ItemInfoManager>
 
 public class ItemInfo
 {
-    public int Id;
-    public string ItemName;
-    public string Desciption;
-    public string Icon;
-    public int Score;
+    public int Id { get; set; }
+    public string ItemName { get; set; }
+    public string Desciption { get; set; }
+    public string Icon { get; set; }
+    public int Score { get; set; }
 }

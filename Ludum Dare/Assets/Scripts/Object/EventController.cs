@@ -37,6 +37,7 @@ public class EventController : MonoBehaviour
             if (strName.Length > 1)
             {
                 string path = Config.EventIconPath + strName[0];
+                //导入要切的图
                 Sprite[] eventSpriteAtlas = Resources.LoadAll<Sprite>(path);
 
                 eventImage = eventSpriteAtlas[int.Parse(strName[1])];
@@ -99,6 +100,10 @@ public class EventController : MonoBehaviour
         EventPanel.StartAni();
     }
 
+    /// <summary>
+    /// 将时间标记为isdone （ui选择后回调，表示完成）
+    /// </summary>
+    /// <param name="isdone">是否完成，true表示事件完成</param>
     public void SetIsDone(bool isdone)
     {
         this.isDone = isdone;

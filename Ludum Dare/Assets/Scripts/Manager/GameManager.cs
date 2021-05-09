@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     public int Energy;
     public int Score;
     public List<int> ExpEventsList;
-    public List<int> ItemIDList;
+    public List<int> ItemIDList { get; set; }
     [SerializeField]
     private bool isDead = false;
 
