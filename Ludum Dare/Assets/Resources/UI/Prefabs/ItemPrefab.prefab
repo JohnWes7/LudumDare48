@@ -89,4 +89,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemDescriptionPrefab: {fileID: 8895143633507768050, guid: ff18026609439be418f36df0201716ed, type: 3}
-  index: 0
+  ItemDescription: {fileID: 0}
+  ID: 1
+  isOn: 0
+  ShowTime: 0.5
+  Timer: 0

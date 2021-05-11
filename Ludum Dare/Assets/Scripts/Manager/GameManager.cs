@@ -38,7 +38,21 @@ public class GameManager : MonoBehaviour
     public AsyncOperation asyncOperation;
 
 
-
+    #region debug for Items
+    void Update()
+    {
+        //用来直接生成几个遗物 测试UI用 不用管
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            ChangeItemList(13);
+        }
+        //删除遗物测试
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            ChangeItemList(-13);
+        }
+    }
+    #endregion
 
     private void Start()
     {

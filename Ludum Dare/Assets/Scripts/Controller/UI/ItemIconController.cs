@@ -52,8 +52,27 @@ public class ItemIconController : MonoBehaviour, IPointerEnterHandler, IPointerE
                 ItemInfo info = ItemInfoManager.Instance.Get(this.ID);  //获得信息
                 int language = PlayerPrefs.GetInt("Language", 0);       //获得语言
 
-                string des = info.Desciption.Split('#')[language];
-                string itemName = info.ItemName.Split('#')[language];
+                string des = "";
+
+                try
+                {
+                    des = info.Desciption.Split('#')[language];
+                }
+                catch
+                {
+
+                }
+
+                string itemName = "";
+                try
+                {
+                    itemName = info.ItemName.Split('#')[language];
+                }
+                catch
+                {
+
+                }
+                
                 ItemDescription.transform.GetChild(0).GetComponent<Text>().text = itemName + "\n\n" + des;
             }
             //非第一次

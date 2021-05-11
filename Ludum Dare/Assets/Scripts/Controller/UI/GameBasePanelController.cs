@@ -29,9 +29,12 @@ public class GameBasePanelController : MonoBehaviour
     public Text RoundAmoungText;
 
     [Header("更新遗物")]
+    public GameObject LeftButton;
+    public GameObject RightButton;
     public GameObject itemPrefab;
     public Transform context;
-    public RectTransform ItemView;
+    public float xOffset = 0;
+    public RectTransform ItemViewRect;
     public List<GameObject> mItemsList = new List<GameObject>();
 
     #region TestUpdateHp
@@ -185,6 +188,9 @@ public class GameBasePanelController : MonoBehaviour
             //初始化
             item.GetComponent<ItemIconController>().InIt(ManagerItemIDList[i]);
         }
+
+        //更新显示左右按钮
+        SetContextXPos(xOffset, false);
     }
 
     /// <summary>
@@ -192,32 +198,87 @@ public class GameBasePanelController : MonoBehaviour
     /// </summary>
     public void RightButtonCallback()
     {
-        SetContextXPos(-100);
+        SetContextXPos(context.localPosition.x - 600);
     }
 
     //点击向左按钮回调
     public void LeftButtonCallback()
     {
-        SetContextXPos(100);
+        SetContextXPos(context.localPosition.x + 600);
     }
 
-    public void SetContextXPos(float x)
+    public void SetContextXPos(float xPos, bool animation = true)
     {
-        context.transform.DOKill(true);
-
-        RectTransform test = context.GetComponent<RectTransform>();
-
+        //获取组件
+        RectTransform contextRect = context.GetComponent<RectTransform>();
+        #region debug
         //Debug.Log("offsetMin" + test.offsetMin);
         //Debug.Log("offsetMax" + test.offsetMax);
 
         //test.offsetMax = new Vector2(-71, test.offsetMax.y);
 
         //Debug.Log(test.rect.width);
-        //Debug.Log(test.rect.height);
-        Vector3 willPos = test.localPosition + new Vector3(x, 0, 0);
-        willPos = new Vector3(Mathf.Clamp(willPos.x, -(test.rect.width - ItemView.rect.width), 0), 0, 0);
+        //Debug.Log(test.rect.height); 
+        #endregion
 
-        context.DOLocalMoveX(willPos.x, 0.2f);
+        //要先kill保证position到达上一个willPos
+        context.transform.DOKill(true);
+
+        //Vector3 willPos = contextRect.localPosition + new Vector3(x, 0, 0);
+        Vector3 willPos = new Vector3(xPos, 0, 0);
+        
+        //第一种钳制算法
+        //willPos = new Vector3(Mathf.Clamp(willPos.x, -(contextRect.rect.width - ItemViewRect.rect.width), 0), 0, 0);
+        //第二种钳制算法
+        willPos = new Vector3(Mathf.Clamp(willPos.x, -600 * (Mathf.Ceil((mItemsList.Count * 120) / (ItemViewRect.rect.width + 20)) - 1), 0), 0, 0);
+        //Debug.Log(-600 * (Mathf.Ceil((contextRect.rect.width + 20) / (ItemViewRect.rect.width + 20)) - 1));
+
+        
+        if (animation)
+        {
+            context.DOLocalMoveX(willPos.x, 0.2f).OnComplete(() => {
+                UpdateItemLRButton();
+                xOffset = context.transform.localPosition.x;
+            });
+        }
+        else
+        {
+            context.localPosition = willPos;
+            UpdateItemLRButton();
+            xOffset = context.transform.localPosition.x;
+        }
+    }
+
+    public void UpdateItemLRButton()
+    {
+        //获取组件
+        RectTransform contextRect = context.GetComponent<RectTransform>();
+        //Debug.Log("contextRectwidth: " + contextRect.rect.width + "  ItemViewRect: " + ItemViewRect.rect.width +"  listNum: " + mItemsList.Count);
+        //原用contextRect.rect.width 替换为 mItemsList.Count * 100 -20
+        if (mItemsList.Count * 120 -20 <= ItemViewRect.rect.width)
+        {
+            LeftButton.SetActive(false);
+            RightButton.SetActive(false);
+            return;
+        }
+        else
+        {
+            if (context.localPosition.x == 0)
+            {
+                LeftButton.SetActive(false);
+                RightButton.SetActive(true);
+            }
+            else if (context.localPosition.x == -600 * (Mathf.Ceil((mItemsList.Count * 120) / (ItemViewRect.rect.width + 20)) - 1))
+            {
+                LeftButton.SetActive(true);
+                RightButton.SetActive(false);
+            }
+            else
+            {
+                LeftButton.SetActive(true);
+                RightButton.SetActive(true);
+            }
+        }
     }
 
     /// <summary>

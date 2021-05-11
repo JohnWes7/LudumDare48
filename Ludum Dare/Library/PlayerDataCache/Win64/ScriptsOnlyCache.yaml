@@ -10,6 +10,7 @@ ScriptsOnlyBuild:
     - ExitController
     - GameBasePanelController
     - GameManager
+    - ItemIconController
     - OptionsPanelController
     - PlayerController
     - SingleDayManager
@@ -51,6 +52,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
     - UnityEngine.UI.Toggle
+    - UnityEngine.UI.VerticalLayoutGroup
   sceneClasses:
     Assets/Scenes/EndScene.unity:
     - Class: 1
@@ -74,11 +76,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11732}
     - Class: 114
-      Script: {instanceID: 11734}
+      Script: {instanceID: 11758}
     - Class: 114
-      Script: {instanceID: 11760}
+      Script: {instanceID: 12132}
     - Class: 114
-      Script: {instanceID: 12864}
+      Script: {instanceID: 12866}
     - Class: 114
       Script: {instanceID: 14486}
     - Class: 114
@@ -141,29 +143,33 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11732}
     - Class: 114
-      Script: {instanceID: 11734}
+      Script: {instanceID: 11758}
     - Class: 114
-      Script: {instanceID: 11760}
+      Script: {instanceID: 12132}
     - Class: 114
-      Script: {instanceID: 12396}
+      Script: {instanceID: 12280}
     - Class: 114
-      Script: {instanceID: 12672}
+      Script: {instanceID: 12398}
     - Class: 114
       Script: {instanceID: 12674}
     - Class: 114
-      Script: {instanceID: 12746}
+      Script: {instanceID: 12676}
     - Class: 114
-      Script: {instanceID: 12864}
+      Script: {instanceID: 12748}
     - Class: 114
-      Script: {instanceID: 12984}
+      Script: {instanceID: 12866}
     - Class: 114
-      Script: {instanceID: 13264}
+      Script: {instanceID: 12986}
     - Class: 114
-      Script: {instanceID: 13568}
+      Script: {instanceID: 13266}
     - Class: 114
-      Script: {instanceID: 14042}
+      Script: {instanceID: 13570}
     - Class: 114
-      Script: {instanceID: 14194}
+      Script: {instanceID: 13832}
+    - Class: 114
+      Script: {instanceID: 14044}
+    - Class: 114
+      Script: {instanceID: 14196}
     - Class: 114
       Script: {instanceID: 14516}
     - Class: 114
@@ -240,41 +246,45 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11732}
     - Class: 114
-      Script: {instanceID: 11734}
+      Script: {instanceID: 11758}
     - Class: 114
-      Script: {instanceID: 11760}
+      Script: {instanceID: 12082}
     - Class: 114
-      Script: {instanceID: 12084}
+      Script: {instanceID: 12132}
     - Class: 114
-      Script: {instanceID: 12396}
+      Script: {instanceID: 12280}
     - Class: 114
-      Script: {instanceID: 12672}
+      Script: {instanceID: 12398}
     - Class: 114
       Script: {instanceID: 12674}
     - Class: 114
-      Script: {instanceID: 12746}
+      Script: {instanceID: 12676}
     - Class: 114
-      Script: {instanceID: 12864}
+      Script: {instanceID: 12748}
     - Class: 114
-      Script: {instanceID: 12946}
+      Script: {instanceID: 12866}
     - Class: 114
-      Script: {instanceID: 12984}
+      Script: {instanceID: 12948}
     - Class: 114
-      Script: {instanceID: 13152}
+      Script: {instanceID: 12986}
     - Class: 114
-      Script: {instanceID: 13186}
+      Script: {instanceID: 13154}
     - Class: 114
-      Script: {instanceID: 13264}
+      Script: {instanceID: 13188}
     - Class: 114
-      Script: {instanceID: 13302}
+      Script: {instanceID: 13266}
     - Class: 114
-      Script: {instanceID: 13508}
+      Script: {instanceID: 13304}
     - Class: 114
-      Script: {instanceID: 13568}
+      Script: {instanceID: 13510}
     - Class: 114
-      Script: {instanceID: 14042}
+      Script: {instanceID: 13570}
     - Class: 114
-      Script: {instanceID: 14194}
+      Script: {instanceID: 13832}
+    - Class: 114
+      Script: {instanceID: 14044}
+    - Class: 114
+      Script: {instanceID: 14196}
     - Class: 114
       Script: {instanceID: 14486}
     - Class: 114
@@ -346,12 +356,6 @@ ScriptsOnlyBuild:
     className: Text
   - hash:
       serializedVersion: 2
-      Hash: a6e561615949734e9f12f9b61661f43e
-    assemblyName: UnityEngine.UI.dll
-    namespaceName: UnityEngine.UI
-    className: Image
-  - hash:
-      serializedVersion: 2
       Hash: 4bc4346a71a8df53a6b106f68ef3a190
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -418,6 +422,12 @@ ScriptsOnlyBuild:
     className: TouchInputModule
   - hash:
       serializedVersion: 2
+      Hash: a6e561615949734e9f12f9b61661f43e
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: Image
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools.TestRunner.Callbacks
@@ -440,6 +450,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: GridLayoutGroup
+  - hash:
+      serializedVersion: 2
+      Hash: ba319314626aa33f9c1a2a5c2f385162
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ItemIconController
   - hash:
       serializedVersion: 2
       Hash: 523ce309f50d9eee6a8fc0e2f86c9c97
@@ -520,7 +536,7 @@ ScriptsOnlyBuild:
     className: AnimationPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 5ff8f1af4975d423fd8720f25a3004c9
+      Hash: 7a25ec013bf3e73fd1c998b12936a7e2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameBasePanelController
@@ -754,12 +770,6 @@ ScriptsOnlyBuild:
     className: PlayerController
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: CoursePannelCotroller
-  - hash:
-      serializedVersion: 2
       Hash: 760787567e1b60d64a3e421ab83ee14a
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -850,7 +860,7 @@ ScriptsOnlyBuild:
     className: BaseInput
   - hash:
       serializedVersion: 2
-      Hash: e475406c31c49ebbe05248bfa6b78a66
+      Hash: b559f9b042ace90c5242e9814001dd21
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -925,4 +935,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/StartScene.unity
   - Assets/Scenes/GameScene.unity
   - Assets/Scenes/EndScene.unity
-  playerPath: E:/Unity/LDdone/FallEndless.exe
+  playerPath: E:/Unity/FallEndless/FallEndless.exe
