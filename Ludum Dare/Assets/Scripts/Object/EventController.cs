@@ -6,7 +6,7 @@ using UnityEngine.U2D;
 public class EventController : MonoBehaviour
 {
     [Header("该事件属性")]
-    public int EventId;
+    public EventInfo eventInfo;
     public bool isDone;
 
     [Header("显示相关")]
@@ -15,18 +15,18 @@ public class EventController : MonoBehaviour
     public SpriteRenderer mSpriteRenderer;
     public EventPanelController EventPanel;
 
-    public void InIt(int EventId)
+    public void InIt(EventInfo info)
     {
         //获取事件ID
-        this.EventId = EventId;
+        this.eventInfo = info;
 
         //初始化
         {
             //改名字 
-            gameObject.name = "event_" + this.EventId;
+            gameObject.name = "event_" + this.eventInfo.Id;
 
             //根据列表替换显示的图(这一句之后不会是赋值会是直接读取)
-            string propertyImageName = EventInfoManager.Instance.EventInfoList[this.EventId].Icon;
+            string propertyImageName = eventInfo.Icon;
             
             //进行操作
             string[] strName = propertyImageName.Split('#');
@@ -93,7 +93,7 @@ public class EventController : MonoBehaviour
             EventPanel = Instantiate<GameObject>(EventPanelPrefabs, GameObject.Find("Canvas").transform).GetComponent<EventPanelController>();
 
             //初始化
-            EventPanel.InIt(this.EventId, this);
+            EventPanel.InIt(this.eventInfo, this);
         }
 
         //播放动画

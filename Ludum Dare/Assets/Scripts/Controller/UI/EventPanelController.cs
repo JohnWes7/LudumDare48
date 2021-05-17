@@ -6,18 +6,17 @@ using UnityEngine.UI;
 
 public class EventPanelController : MonoBehaviour
 {
-    [Header("事件代码")]
-    int ID;
+    [Header("事件信息")]
+    EventInfo evenInfo;
     [Header("UI元素")]
     public Text Title;
     public Text Desciption;
 
-    public GameObject Choice1;
-    public Text Choice1Text;
-    public GameObject Choice2;
-    public Text Choice2Text;
-    public GameObject Choice3;
-    public Text Choice3Text;
+    [Header("Options选择项")]
+    public Transform OptionsParent;
+    public GameObject OptionPrefab;
+
+    public List<OptionButtonController> OptionList;
 
     [Header("生成该panel的组件")]
     public EventController mEventController;
@@ -25,55 +24,39 @@ public class EventPanelController : MonoBehaviour
     /// <summary>
     /// 初始化
     /// </summary>
-    /// <param name="ID"></param>
+    /// <param name="Info"></param>
     /// <param name="mEventController"></param>
-    public void InIt(int ID, EventController mEventController)
+    public void InIt(EventInfo Info, EventController mEventController)
     {
         //改自身属性
-        gameObject.name = "event_" + ID.ToString();
-        this.ID = ID;
+        gameObject.name = "event_" + Info.ToString();
+        this.evenInfo = Info;
         this.mEventController = mEventController;
 
         //获取语言
         int language = PlayerPrefs.GetInt("Language", (int)Config.Language.CH);
 
         //初始化显示
-        //拿到静态数据
-        EventInfo info = EventInfoManager.Instance.EventInfoList[ID];
+
 
         //更改标题
-        Title.text = info.Eventtitle.Split('#')[language];
+        Title.text = evenInfo.Eventtitle.Split('#')[language];
 
         //更改描述
-        Desciption.text = info.Desciption.Split('#')[language];
+        Desciption.text = evenInfo.Desciption.Split('#')[language];
 
-        //更改choice1
-        if (info.Choice1 != "")
+        //显示选项
+        for (int i = 0; i < evenInfo.Options.Count; i++)
         {
-            string[] text = info.Choice1.Split('#');
-            Choice1.SetActive(true);
-            Choice1Text.text = text[language];
+            OptionButtonController newOption = Instantiate<GameObject>(OptionPrefab, OptionsParent).GetComponent<OptionButtonController>();
+            newOption.InIt(evenInfo.Options[i]);
+            OptionList.Add(newOption);
         }
 
-        //更改choice2
-        if (info.Choice2 != "")
-        {
-            string[] text = info.Choice2.Split('#');
-            Choice2.SetActive(true);
-            Choice2Text.text = text[language];
-        }
-
-        //更改choice3
-        if (info.Choice3 != "")
-        {
-            string[] text = info.Choice3.Split('#');
-            Choice3.SetActive(true);
-            Choice3Text.text = text[language];
-        }
     }
 
     /// <summary>
-    /// 回退
+    /// 回退按键
     /// </summary>
     public void Back()
     {
@@ -81,26 +64,7 @@ public class EventPanelController : MonoBehaviour
         PlayerController.Instance.OnEventPanelClose();
     }
 
-
-    public void ChooseChoice1Change()
-    {
-        string change = EventInfoManager.Instance.EventInfoList[this.ID].Choice1Change;
-        EventDecoder(change);
-    }
-
-    public void ChooseChoice2Change()
-    {
-        string change = EventInfoManager.Instance.EventInfoList[this.ID].Choice2Change;
-        EventDecoder(change);
-    }
-
-    public void ChooseChoice3Change()
-    {
-        string change = EventInfoManager.Instance.EventInfoList[this.ID].Choice3Change;
-        EventDecoder(change);
-    }
-
-    //神必堡垒 解码器
+    //old神必堡垒 解码器
     public void EventDecoder(string change)
     {
         string addDescip = "\n\n";
@@ -144,15 +108,15 @@ public class EventPanelController : MonoBehaviour
                 //如果有变化再加入数组
                 if (temp != 0)
                 {
-                    GameManager.Instance.ChangeItemList(temp);
+                    //GameManager.Instance.ChangeItemList(temp);
                     changeItemID.Add(temp);
                 }
             }
         }
 
         //向数据加入
-        GameManager.Instance.ChangeEnery(deltafuel);
-        GameManager.Instance.ChangeHp(deltahp);
+        //GameManager.Instance.ChangeEnery(deltafuel);
+        //GameManager.Instance.ChangeHp(deltahp);
 
 
         //结束报告
@@ -202,7 +166,7 @@ public class EventPanelController : MonoBehaviour
                     judgelost = true;
                     lost += name[language] + " ";
                 }
-                
+
             }
             get += "\n";
             lost += "\n";
@@ -225,13 +189,8 @@ public class EventPanelController : MonoBehaviour
 
         Debug.Log("deltafuel:" + deltafuel + "  deltahp:" + deltahp);
 
-        //空语句直接在这边开始执行
-        end:
-
-        //隐藏按钮
-        this.Choice1.SetActive(false);
-        this.Choice2.SetActive(false);
-        this.Choice3.SetActive(false);
+    //空语句直接在这边开始执行
+    end:
 
         //更改Desciption
         ChangeDesciption(Desciption.text + addDescip);
@@ -252,7 +211,7 @@ public class EventPanelController : MonoBehaviour
         transform.localScale = new Vector3(0.5f, 0.5f, 1);
         transform.DOScale(Vector3.one, 0.2f);
     }
-
+    
     public void EndAni()
     {
         transform.DOKill(true);

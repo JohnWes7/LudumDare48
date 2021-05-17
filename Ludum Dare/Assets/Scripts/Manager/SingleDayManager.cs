@@ -22,23 +22,24 @@ public class SingleDayManager : MonoBehaviour
     private void Awake()
     {
         ToDay = this;
-        
+
     }
 
     private void Start()
     {
         //一开始直接生成？或者要manager来调用
         GenerateEvent();
-        
+
     }
 
     //负责生成事件
     public void GenerateEvent()
     {
         //事件个数
-        int EventAmount = Random.Range(1, 3);
-        int rEventID1 = 0; 
+        int EventAmount = Random.Range(1, 2);
+        int rEventID1 = 0;
         int rEventID2 = 0;
+
 
         //生成第一个事件
         if (EventAmount > 0)
@@ -48,7 +49,7 @@ public class SingleDayManager : MonoBehaviour
             while (true)
             {
                 //取得事件
-                rEventID1 = Random.Range(0, EventInfoManager.Instance.EventInfoList.Count);
+                rEventID1 = Random.Range(0, EventInfoManager.Instance.EventInfoListCount);
 
                 //判断能不能用
                 if (GameManager.Instance.TryEvent(rEventID1))
@@ -60,11 +61,12 @@ public class SingleDayManager : MonoBehaviour
             //生成事件并加入数组(用数组来判断能不能进下一关)
             GameObject go = Instantiate<GameObject>(EventPrefabs, EventPos[0]);
             go.transform.localPosition = Vector3.zero;                  //改位置
-            EventController ec = go.GetComponent<EventController>();
-            Events.Add(ec);                                             //加入数组
+
+            EventController NewEvent1 = go.GetComponent<EventController>();
+            Events.Add(NewEvent1);                                      //加入数组
 
             //初始化生成的event
-            ec.InIt(rEventID1);
+            NewEvent1.InIt(EventInfoManager.Instance.GetInfo(rEventID1));
         }
 
         //生成第2个事件
@@ -73,7 +75,7 @@ public class SingleDayManager : MonoBehaviour
             //Debug.Log("生成第2个事件");
             while (true)
             {
-                rEventID2 = Random.Range(0, EventInfoManager.Instance.EventInfoList.Count);
+                rEventID2 = Random.Range(0, EventInfoManager.Instance.EventInfoListCount);
                 if (rEventID2 != rEventID1)
                 {
                     //判断能不能用
@@ -87,16 +89,16 @@ public class SingleDayManager : MonoBehaviour
             //生成事件并加入数组(用数组来判断能不能进下一关)
             GameObject go = Instantiate<GameObject>(EventPrefabs, EventPos[1]); //生成在了第二个位置
             go.transform.localPosition = Vector3.zero;                          //改位置
-            EventController ec = go.GetComponent<EventController>();
-            Events.Add(ec);                                                     //加入数组
+            EventController NewEvent2 = go.GetComponent<EventController>();
+            Events.Add(NewEvent2);                                                     //加入数组
 
             //初始化生成的event
-            ec.InIt(rEventID2);
+            NewEvent2.InIt(EventInfoManager.Instance.GetInfo(rEventID2));
         }
 
         //计入经历过的事件
-        GameManager.Instance.AddExpEvents(rEventID1);
-        GameManager.Instance.AddExpEvents(rEventID2);
+        PlayerModel.Instance.AddExpEvents(EventInfoManager.Instance.GetInfo(rEventID1).Id);
+        PlayerModel.Instance.AddExpEvents(EventInfoManager.Instance.GetInfo(rEventID2).Id);
 
         Debug.Log("EventAmount:" + EventAmount + "  rEventID1:" + rEventID1 + " rEventID2:" + rEventID2);
     }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using LitJson;
 
 /// <summary>
 /// 游戏ui面板控制器 负责显示血量能量天数遗物
@@ -79,6 +80,14 @@ public class GameBasePanelController : MonoBehaviour
     #endregion
     public static GameBasePanelController Instance { get; set; }
 
+    public void UpdatePlayerInfo(PlayerModel playerModel)
+    {
+        UpdateDay(playerModel.GameDay);
+        UpdateEnergy(playerModel.Energy, true);
+        UpdateHp(playerModel.Hp, true);
+        UpdateItems(playerModel.ItemIDList);
+    }
+
     private void Awake()
     {
         Instance = this;
@@ -86,6 +95,8 @@ public class GameBasePanelController : MonoBehaviour
         //List<int> test = new List<int>();
         //test.Add(2);
         //UpdateItems(test); 
+
+        
         #endregion
     }
 

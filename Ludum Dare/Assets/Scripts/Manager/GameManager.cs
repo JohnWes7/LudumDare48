@@ -23,35 +23,26 @@ public class GameManager : MonoBehaviour
     public float EndDuring = 1f;
     public GameObject mCanvas;
 
-    [Header("玩家基本信息")]
-    [SerializeField,Tooltip("统计天数（关卡）")]
-    int GameDay;
-    public int Hp;
-    public int Energy;
-    public int Score;
-    public List<int> ExpEventsList;
-    public List<int> ItemIDList { get; set; }
-    [SerializeField]
-    private bool isDead = false;
+    
 
     [Header("异步")]
     public AsyncOperation asyncOperation;
 
 
     #region debug for Items
-    void Update()
-    {
-        //用来直接生成几个遗物 测试UI用 不用管
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            ChangeItemList(13);
-        }
-        //删除遗物测试
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            ChangeItemList(-13);
-        }
-    }
+    //void Update()
+    //{
+    //    //用来直接生成几个遗物 测试UI用 不用管
+    //    if (Input.GetKeyDown(KeyCode.G))
+    //    {
+    //        ChangeItemList(13);
+    //    }
+    //    //删除遗物测试
+    //    if (Input.GetKeyDown(KeyCode.H))
+    //    {
+    //        ChangeItemList(-13);
+    //    }
+    //}
     #endregion
 
     private void Start()
@@ -62,10 +53,10 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this);
 
         //初始数值
-        GameDay = 1;
+        PlayerModel.Instance.InIt();
 
         //开始跳转
-        string laber = "Day : " + GameDay.ToString();
+        string laber = "Day : " + PlayerModel.Instance.GameDay.ToString();
         BeginFadeAni(() => {
 
             //完成开始动画后进行场景跳转
@@ -130,30 +121,20 @@ public class GameManager : MonoBehaviour
     /// 第一天初始化函数
     /// </summary>
     private void Level1InIt()
-    {
-        //初始数值
-        Hp = 100;
-        Energy = 100;
-        Score = 0;
-        ExpEventsList = new List<int>();
-        ItemIDList = new List<int>();
-
+    { 
         //拿初始数值更新UI
         GameBasePanelController cbpc = GameObject.Find("Canvas/GameBasePanel").GetComponent<GameBasePanelController>();
-        cbpc.UpdateHp(Hp, true);
-        cbpc.UpdateEnergy(Energy, true);
-        cbpc.UpdateDay(GameDay);
-        cbpc.UpdateItems(ItemIDList);
+        cbpc.UpdatePlayerInfo(PlayerModel.Instance);
     }
 
     //之后天数
     public void StartChangeToNextLevel()
     {
         //天数变化
-        GameDay++;
+        PlayerModel.Instance.IncreaseDay();
 
         //开始跳转
-        string laber = "Day : " + GameDay.ToString();
+        string laber = "Day : " + PlayerModel.Instance.GameDay.ToString();
         BeginFadeAni(() => {
 
             //完成开始动画后进行场景跳转
@@ -164,13 +145,13 @@ public class GameManager : MonoBehaviour
                 EndFadeAni();
 
                 //减少energy
-                ChangeEnery(-5);
+                PlayerModel.Instance.ChangeEnery(-5);
 
                 //更新UI显示
                 GameBasePanelController cbpc = GameObject.Find("Canvas/GameBasePanel").GetComponent<GameBasePanelController>();
-                cbpc.UpdateDay(GameDay);
-                cbpc.UpdateItems(ItemIDList);
-                cbpc.UpdateHp(Hp, true);
+                cbpc.UpdateDay(PlayerModel.Instance.GameDay);
+                cbpc.UpdateItems(PlayerModel.Instance.ItemIDList);
+                cbpc.UpdateHp(PlayerModel.Instance.Hp, true);
             });
 
         }, laber);
@@ -204,69 +185,10 @@ public class GameManager : MonoBehaviour
         unityAction.Invoke();
     }
 
-
-
-
-    public void ChangeEnery(int deltaEnergy)
-    {
-        //更改数值
-        this.Energy = Mathf.Clamp(this.Energy + deltaEnergy, 0, 100);
-
-        //更新ui显示
-        GameBasePanelController cbpc = GameObject.Find("Canvas/GameBasePanel").GetComponent<GameBasePanelController>();
-        cbpc.UpdateEnergy(this.Energy);
-
-        if (this.Energy <= 0)
-        {
-            Dead();
-        }
-    }
-
-    public void ChangeHp(int deltaHp)
-    {
-        //更改数值
-        this.Hp = Mathf.Clamp(this.Hp + deltaHp, 0, 100);
-
-        //更新ui显示
-        GameBasePanelController cbpc = GameObject.Find("Canvas/GameBasePanel").GetComponent<GameBasePanelController>();
-        cbpc.UpdateHp(this.Hp);
-
-        if (this.Hp <= 0)
-        {
-            Dead();
-        }
-    }
-
-    public void AddExpEvents(int event_Id)
-    {
-        ExpEventsList.Add(event_Id);
-    }
-
-    public void ChangeItemList(int item_change)
-    {
-        if (item_change == 0)
-        {
-            return;
-        }
-        else if (item_change < 0 )
-        {
-            ItemIDList.Remove(Mathf.Abs(item_change));
-        }
-        else if (item_change > 0)
-        {
-            ItemIDList.Add(item_change);
-        }
-
-        //更新显示
-        GameBasePanelController cbpc = GameObject.Find("Canvas/GameBasePanel").GetComponent<GameBasePanelController>();
-        cbpc.UpdateItems(ItemIDList);
-
-    }
-
-    public bool TryEvent(int event_id)
+    public bool TryEvent(int index)
     {
         
-        EventInfo eventInfo = EventInfoManager.Instance.EventInfoList[event_id];
+        EventInfo eventInfo = EventInfoManager.Instance.GetInfo(index);
 
         //如果是0代表可重复出现
         if (eventInfo.Precondition == 0)
@@ -276,64 +198,52 @@ public class GameManager : MonoBehaviour
         else
         {
             //如果这个事件之前出现过，就false
-            bool judge1 = !ExpEventsList.Contains(event_id);
+            bool judge1 = !PlayerModel.Instance.ExpEventsList.Contains(eventInfo.Id);
             bool judge2 = true;
 
             //如果是 需要条件 的 非开头 事件链 则判断满不满足
             if (eventInfo.Precondition > 0)
             {
+                //与遗物来进行判断
                 //如果没有满足这个的条件，false
-                judge2 = ItemIDList.Contains(eventInfo.Precondition);
+                judge2 = PlayerModel.Instance.ItemIDList.Contains(eventInfo.Precondition);
             }
             
 
             return judge1 && judge2;
         }
-
-        return false;
     }
 
 
-    private void Dead()
+    public void Dead()
     {
-        if (isDead)
+
+        Debug.Log("dead");
+
+
+        //人物不能移动
+        if (PlayerController.Instance)
         {
-            return;
+            PlayerController.Instance.enabled = false;
         }
-        else
+
+        //跳转场景到end
+        BeginFadeAni(() =>
         {
-            Debug.Log("dead");
-            isDead = true;
-
-            //人物不能移动
-            if (PlayerController.Instance)
+            BeginAsyncLoadSence("EndScene", () =>
             {
-                PlayerController.Instance.enabled = false;
-            }
-            
-            //跳转场景到end
-            BeginFadeAni(() =>
-            {
-                BeginAsyncLoadSence("EndScene", () =>
-                {
-                    //结束动画
-                    EndFadeAni();
+                //结束动画
+                EndFadeAni();
 
-                    //计算分数
-                    for (int i = 0; i < ItemIDList.Count; i++)
-                    {
-                        ItemInfo info = ItemInfoManager.Instance.Get(ItemIDList[i]);
-                        this.Score += info.Score * 50;
-                    }
-                    this.Score += this.GameDay * 10;
+                //算分
+                PlayerModel.Instance.CaculateScore();
 
-                    //刷新页面
-                    GameObject.Find("EndPanel").GetComponent<EndPanelController>().UpdateEndView(this.Score, this.GameDay);
+                //刷新页面
+                GameObject.Find("EndPanel").GetComponent<EndPanelController>().UpdateEndView(PlayerModel.Instance.Score, PlayerModel.Instance.GameDay);
 
-                });
+            });
 
-            }, "End...");
-        }
+        }, "End...");
     }
 
     public void DestroySelf()
