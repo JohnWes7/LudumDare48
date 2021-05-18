@@ -18,11 +18,10 @@ public class StartPannelController : MonoBehaviour
     //{
     //    EventInfo eventInfo = new EventInfo();
 
-    //    eventInfo.Id = "Discovery_of_oil";
+    //    //eventInfo.Id = "Discovery_of_oil";
     //    eventInfo.Eventtitle = "发现石油#Discovery of oil";
     //    eventInfo.Desciption = "你找到了一个人类遗留的石油精炼器，精炼器已经损坏，但你可以用自带的精炼器将其转化为能源，但这将消耗大量能源，并且这批石油的品质令人担忧#You find an oil refiner left by humans. The refiner is damaged, but you can use your own refiner to turn it into energy, but it will consume a lot of energy, and the quality of the oil is worrying";
     //    eventInfo.Icon = "Doo";
-    //    eventInfo.Precondition = 0;
 
 
     //    eventInfo.Options = new List<Option>();
@@ -61,7 +60,7 @@ public class StartPannelController : MonoBehaviour
     //            rp1.randomModifies.Add(r4);
     //        }
     //        option1.RandomParts.Add(rp1); //将第一轮加入option1的随机判定中
-            
+
     //        eventInfo.Options.Add(option1);
 
     //        Option option2 = new Option();
@@ -69,8 +68,11 @@ public class StartPannelController : MonoBehaviour
     //        eventInfo.Options.Add(option2);
     //    }
 
-    //    Debug.Log(LitJson.JsonMapper.ToJson(eventInfo));
-    //    File.WriteAllText(Application.persistentDataPath + "/fallendless_event.txt", LitJson.JsonMapper.ToJson(eventInfo));
+    //    Dictionary<string, EventInfo> EventInfoList = new Dictionary<string, EventInfo>();
+    //    EventInfoList.Add("Discovery_of_oil", eventInfo);
+
+    //    Debug.Log(LitJson.JsonMapper.ToJson(EventInfoList));
+    //    File.WriteAllText(Application.persistentDataPath + "/fallendless_event.json", LitJson.JsonMapper.ToJson(EventInfoList));
 
 
     //}

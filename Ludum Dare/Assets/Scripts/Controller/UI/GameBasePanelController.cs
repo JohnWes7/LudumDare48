@@ -183,7 +183,7 @@ public class GameBasePanelController : MonoBehaviour
         RoundAmoungText.text = day.ToString();
     }
 
-    public void UpdateItems(List<int> ManagerItemIDList)
+    public void UpdateItems(List<string> ManagerItemIDList)
     {
         //清除上次的显示
         for (int i = 0; i < mItemsList.Count; i++)

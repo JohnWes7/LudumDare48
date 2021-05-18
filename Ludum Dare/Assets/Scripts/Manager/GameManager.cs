@@ -185,13 +185,13 @@ public class GameManager : MonoBehaviour
         unityAction.Invoke();
     }
 
-    public bool TryEvent(int index)
+    public bool TryEvent(int index, out string id)
     {
-        
         EventInfo eventInfo = EventInfoManager.Instance.GetInfo(index);
+        id = eventInfo.Id;
 
-        //如果是0代表可重复出现
-        if (eventInfo.Precondition == 0)
+        //如果是null代表可重复出现
+        if (eventInfo.Precondition == null)
         {
             return true;
         }
@@ -202,12 +202,12 @@ public class GameManager : MonoBehaviour
             bool judge2 = true;
 
             //如果是 需要条件 的 非开头 事件链 则判断满不满足
-            if (eventInfo.Precondition > 0)
-            {
-                //与遗物来进行判断
-                //如果没有满足这个的条件，false
-                judge2 = PlayerModel.Instance.ItemIDList.Contains(eventInfo.Precondition);
-            }
+            //if (eventInfo.Precondition > 0)
+            //{
+            //    //与遗物来进行判断
+            //    //如果没有满足这个的条件，false
+            //    judge2 = PlayerModel.Instance.ItemIDList.Contains(eventInfo.Precondition);
+            //}
             
 
             return judge1 && judge2;

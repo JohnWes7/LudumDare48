@@ -20,15 +20,41 @@ public class ItemInfoManager : Single<ItemInfoManager>
         #endregion
     }
 
-    public ItemInfo Get(int item_id)
+    public ItemInfo Get(int index)
     {
-        return ItemInfoList[item_id - 1];
+        return ItemInfoList[index];
+    }
+
+    public ItemInfo Get(string Id)
+    {
+        for (int i = 0; i < ItemInfoList.Count; i++)
+        {
+            if (ItemInfoList[i].Id == Id)
+            {
+                return ItemInfoList[i];
+            }
+        }
+
+        return null;
+    }
+
+    public string GetIcon(string Id)
+    {
+        return Get(Id).Icon;
+    }
+    public string GetDescription(string Id)
+    {
+        return Get(Id).Desciption;
+    }
+    public string GetName(string Id)
+    {
+        return Get(Id).ItemName;
     }
 }
 
 public class ItemInfo
 {
-    public int Id { get; set; }
+    public string Id { get; set; }
     public string ItemName { get; set; }
     public string Desciption { get; set; }
     public string Icon { get; set; }

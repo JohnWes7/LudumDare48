@@ -39,20 +39,20 @@ public class SingleDayManager : MonoBehaviour
         int EventAmount = Random.Range(1, 2);
         int rEventID1 = 0;
         int rEventID2 = 0;
-
+        string id1 = "";
+        string id2 = "";
 
         //生成第一个事件
         if (EventAmount > 0)
         {
             //Debug.Log("生成第一个事件");
-
             while (true)
             {
                 //取得事件
                 rEventID1 = Random.Range(0, EventInfoManager.Instance.EventInfoListCount);
 
                 //判断能不能用
-                if (GameManager.Instance.TryEvent(rEventID1))
+                if (GameManager.Instance.TryEvent(rEventID1,out id1))
                 {
                     break;
                 }
@@ -66,7 +66,9 @@ public class SingleDayManager : MonoBehaviour
             Events.Add(NewEvent1);                                      //加入数组
 
             //初始化生成的event
-            NewEvent1.InIt(EventInfoManager.Instance.GetInfo(rEventID1));
+            NewEvent1.InIt(EventInfoManager.Instance.GetInfo(id1));
+            //计入经历过的事件
+            PlayerModel.Instance.AddExpEvents(id1);
         }
 
         //生成第2个事件
@@ -79,7 +81,7 @@ public class SingleDayManager : MonoBehaviour
                 if (rEventID2 != rEventID1)
                 {
                     //判断能不能用
-                    if (GameManager.Instance.TryEvent(rEventID2))
+                    if (GameManager.Instance.TryEvent(rEventID2,out id2))
                     {
                         break;
                     }
@@ -94,13 +96,11 @@ public class SingleDayManager : MonoBehaviour
 
             //初始化生成的event
             NewEvent2.InIt(EventInfoManager.Instance.GetInfo(rEventID2));
+            PlayerModel.Instance.AddExpEvents(id2);
         }
 
-        //计入经历过的事件
-        PlayerModel.Instance.AddExpEvents(EventInfoManager.Instance.GetInfo(rEventID1).Id);
-        PlayerModel.Instance.AddExpEvents(EventInfoManager.Instance.GetInfo(rEventID2).Id);
-
-        Debug.Log("EventAmount:" + EventAmount + "  rEventID1:" + rEventID1 + " rEventID2:" + rEventID2);
+        
+        Debug.Log("EventAmount:" + EventAmount + "  rEventID1:" + id1 + " rEventID2:" + id2);
     }
 
     //开路

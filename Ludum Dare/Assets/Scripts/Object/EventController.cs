@@ -104,7 +104,7 @@ public class EventController : MonoBehaviour
     /// 将时间标记为isdone （ui选择后回调，表示完成）
     /// </summary>
     /// <param name="isdone">是否完成，true表示事件完成</param>
-    public void SetIsDone(bool isdone)
+    public void Done(bool isdone = true)
     {
         this.isDone = isdone;
         SingleDayManager.ToDay.TryOpenRoad();

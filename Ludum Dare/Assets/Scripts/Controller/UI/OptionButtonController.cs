@@ -7,6 +7,7 @@ public class OptionButtonController : MonoBehaviour
 {
     public Text label;
     public Button button;
+    public Option option;
 
     public void InIt(Option option)
     {

@@ -1,111 +1,111 @@
 [
     {
-        "Id": 1,
+        "Id": "The_mouse_tail",
         "ItemName": "老鼠尾巴#The mouse tail",
         "Desciption": "你与变异老鼠英勇战斗之后的战利品，由于辐射的影响大部分老鼠都死亡了，但幸存的老鼠变得极其强壮，这个尾巴的强度就堪比人类的钢筋#The spoils of your heroic battle with mutant mice. Most of the mice die due to radiation, but the ones that survive become extremely strong. The strength of this tail is comparable to human steel",
         "Icon": "Mt",
         "Score": 3
     },
     {
-        "Id": 2,
+        "Id": "2",
         "ItemName": "神秘的容器#Mysterious Container",
         "Desciption": "历经战争却依然保存完好的容器，里面一定藏了些极其重要的东西#There must be something very important inside a container that has survived the war and survived it",
         "Icon": "Mc",
         "Score": 1
     },
     {
-        "Id": 3,
+        "Id": "3",
         "ItemName": "储存核武器的容器#A container for storing nuclear weapons",
         "Desciption": "印有核武器标志的容器，一个小国曾因为它被另一个大国攻击，马上你就可以破解它的密码打开它#A container marked with a nuclear weapon that a small country once attacked by another big country, and you can crack the code and open it in no time",
         "Icon": "Nw",
         "Score": 1
     },
     {
-        "Id": 4,
+        "Id": "4",
         "ItemName": "一袋洗衣粉#A bag of washing powder",
         "Desciption": "一袋成分与洗衣粉完全相同的粉末，却被一个大国称为核原料#A bag of powder with the same composition as washing powder is called nuclear material by a big country",
         "Icon": "Wa",
         "Score": 5
     },
     {
-        "Id": 5,
+        "Id": "5",
         "ItemName": "廉价的抗辐射药#Cheap anti radiation drugs",
         "Desciption": "个人避难所里的尸体紧握着的一盒抗辐射药，看起来他把这盒廉价药品当作救命稻草，但这盒药和他躲藏的个人避难所一样的没用#The corpse in the personal refuge held a box of anti radiation drugs tightly. It seemed that he regarded the box of cheap drugs as a life-saving straw, but it was as useless as the personal refuge he was hiding in",
         "Icon": "Rd",
         "Score": 1
     },
     {
-        "Id": 6,
+        "Id": "6",
         "ItemName": "纯银十字架#Silver Cross",
         "Desciption": "放在冷冻舱里的富人尸体胸口上的十字架，富人认为冷冻舱能让他度过战争时期，但他显然低估了战争的时长和后果，富人认为十字架能护佑他，但他显然没有认识到核辐射的无情#The cross on the chest of the rich man's body in the freezer. The rich man thought that the freezer could help him through the war, but he obviously underestimated the duration and consequences of the war. The rich man thought that the cross could protect him, but he obviously did not realize the ruthlessness of nuclear radiation",
         "Icon": "Sc",
         "Score": 3
     },
     {
-        "Id": 7,
+        "Id": "7",
         "ItemName": "哔哔小子#Beep boy",
         "Desciption": "一个手表状的生命体征检测器，他的主人的生命体征都已经消失，上面记录了辐射对人体产生危害时各项生命体征数值变化#A watch like vital signs detector, whose owner's vital signs have disappeared, records the changes of vital signs when radiation is harmful to human body",
         "Icon": "Bb",
         "Score": 5
     },
     {
-        "Id": 8,
+        "Id": "8",
         "ItemName": "女仆机器人的记忆#Memory of maid robot",
         "Desciption": "一个女仆机器人的记忆，通过读取它你了解了民用机器人的日常生活，最后的记忆停留在她的人格核心被军队取出#The memory of a maid robot, by reading it, you understand the daily life of a civil robot, and the final memory stays in her personality core and is taken out by the army",
         "Icon": "Mm",
         "Score": 1
     },
     {
-        "Id": 9,
+        "Id": "9",
         "ItemName": "受损战术人形的记忆#Memory of broken war droids",
         "Desciption": "一个损坏的战术人形的记忆，虽然经过了战斗方法的学习，但这个民用机器人显然还是不太擅长作战，幸好只要人格核心还在她就还能重生，这也是她相比人类士兵的重要优点#Although the memory of a damaged war droids has been learned from its combat methods, the civilian robot is obviously not very good at fighting. Fortunately, as long as the core of her personality is still there, she can be reborn. This is also her important advantage compared with human soldiers",
         "Icon": "Mw",
         "Score": 2
     },
     {
-        "Id": 10,
+        "Id": "10",
         "ItemName": "人格核心的一块碎片#A fragment of the core of personality",
         "Desciption": "战术人形的人格核心上的一块小碎片，大部分的核心碎片都被人带走了。但从根本上来说这种级别的战斗就不是她能参与的#A small fragment of the personality core of the war droids, most of the core fragments have been taken away. But fundamentally, this level of fighting is not something she can participate in",
         "Icon": "Cp",
         "Score": 3
     },
     {
-        "Id": 11,
+        "Id": "11",
         "ItemName": "完整的人格核心#Complete personality core",
         "Desciption": "一个人格核心在安上你携带的碎片之后终于变得完整，她的主人带她参与了一场如地狱般的战争，她的主人幸存了下来并把这颗核心安在了一个民用机器人的身体上，但由于核心的破损她再也没能睁眼#A personality core becomes complete after installing the fragments you carry. Her master takes her to participate in a hellish war. Her master survives and installs the core on the body of a civilian robot. However, due to the damage of the core, she can no longer open her eyes",
         "Icon": "Cc",
         "Score": 5
     },
     {
-        "Id": 12,
+        "Id": "12",
         "ItemName": "一些白色粉末#Some white powder",
         "Desciption": "一些成分类似人类的洗衣粉的白色粉末，由于你对容器的粗暴拆解它撒了一地，只剩下了这些",
         "Icon": "Wp",
         "Score": 1
     },
     {
-        "Id": 13,
+        "Id": "13",
         "ItemName": "互联网企业的文档#Documents of Internet enterprises",
         "Desciption": "",
         "Icon": "Di",
         "Score": 2
     },
     {
-        "Id": 14,
+        "Id": "14",
         "ItemName": "电视台的文档#TV station documents",
         "Desciption": "",
         "Icon": "Td",
         "Score": 2
     },
     {
-        "Id": 15,
+        "Id": "15",
         "ItemName": "通信公司的文档#Communications company documentation",
         "Desciption": "",
         "Icon": "Cd",
         "Score": 2
     },
     {
-        "Id": 16,
+        "Id": "16",
         "ItemName": "卫星的航行设定数据#Navigation setting data of satellite",
         "Desciption": "",
         "Icon": "Nd",

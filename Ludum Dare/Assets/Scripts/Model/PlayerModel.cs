@@ -14,7 +14,7 @@ public class PlayerModel : Single<PlayerModel>
     public int GameDay;
     public int Score;
     public List<string> ExpEventsList;
-    public List<int> ItemIDList { get; set; }
+    public List<string> ItemIDList { get; set; }
     [SerializeField]
     private bool isDead = false;
 
@@ -25,7 +25,7 @@ public class PlayerModel : Single<PlayerModel>
         Energy = 100;
         Score = 0;
         ExpEventsList = new List<string>();
-        ItemIDList = new List<int>();
+        ItemIDList = new List<string>();
         isDead = false;
     }
 
@@ -81,25 +81,52 @@ public class PlayerModel : Single<PlayerModel>
         ExpEventsList.Add(event_Id);
     }
 
-    public void ChangeItemList(int item_change)
+    public void ChangeItemList(string item_change)
     {
-        if (item_change == 0)
+        //[0]物品的id [1]物品的得到与失去
+        string[] modify = item_change.Split('.');
+        string id = modify[0];
+
+        string gl = null;
+        if (modify.Length > 0)
         {
-            return;
+            gl = modify[1];
         }
-        else if (item_change < 0)
+
+        if (gl != null)
         {
-            ItemIDList.Remove(Mathf.Abs(item_change));
+            if (gl == "get")
+            {
+                ItemIDList.Add(id);
+            }
+
+            if (gl == "lost")
+            {
+                ItemIDList.Remove(id);
+            }
         }
-        else if (item_change > 0)
+        //如果没有标记当作得到处理
+        else
         {
-            ItemIDList.Add(item_change);
+            ItemIDList.Add(id);
         }
 
         //更新显示
         GameBasePanelController cbpc = GameObject.Find("Canvas/GameBasePanel").GetComponent<GameBasePanelController>();
-        cbpc.UpdateItems(ItemIDList);
+        if(cbpc)
+            cbpc.UpdateItems(ItemIDList);
 
+    }
+
+    public void ChangeItemList(List<string> item_change_list)
+    {
+        if (item_change_list == null)
+            return;
+
+        for (int i = 0; i < item_change_list.Count; i++)
+        {
+            ChangeItemList(item_change_list[i]);
+        }
     }
 
     public void CaculateScore()

@@ -9,20 +9,17 @@ public class ItemIconController : MonoBehaviour, IPointerEnterHandler, IPointerE
     [Header("基本参数")]
     public GameObject ItemDescriptionPrefab;    //预制体
     public GameObject ItemDescription;          //组件
-    public int ID = 1;
+    public string id;
     public bool isOn = false;
     public float ShowTime = 0;
     public float Timer = 0;
 
-    public void InIt(int id)
+    public void InIt(string id)
     {
-        this.ID = id;
-
-        //读表
-        ItemInfo itemInfo = ItemInfoManager.Instance.Get(id);
+        this.id = id;
 
         //加载图片
-        string path = Config.ItemIconPath + itemInfo.Icon;
+        string path = Config.ItemIconPath + ItemInfoManager.Instance.GetIcon(id);
         //Debug.Log(path);
         Sprite sprite = Resources.Load<Sprite>(path);
 
@@ -34,11 +31,6 @@ public class ItemIconController : MonoBehaviour, IPointerEnterHandler, IPointerE
         }
     }
 
-    public void InIt(ItemInfo info)
-    {
-        
-    }
-
     private void Update()
     {
         Timer += Time.deltaTime;
@@ -48,15 +40,16 @@ public class ItemIconController : MonoBehaviour, IPointerEnterHandler, IPointerE
             //第一次
             if (ItemDescription == null)
             {
+                //实例化出来
                 ItemDescription = Instantiate<GameObject>(ItemDescriptionPrefab, Input.mousePosition, Quaternion.identity, transform.parent.parent.parent.parent);
-                ItemInfo info = ItemInfoManager.Instance.Get(this.ID);  //获得信息
+                
                 int language = PlayerPrefs.GetInt("Language", 0);       //获得语言
 
                 string des = "";
 
                 try
                 {
-                    des = info.Desciption.Split('#')[language];
+                    des = ItemInfoManager.Instance.GetDescription(id).Split('#')[language];
                 }
                 catch
                 {
@@ -66,13 +59,13 @@ public class ItemIconController : MonoBehaviour, IPointerEnterHandler, IPointerE
                 string itemName = "";
                 try
                 {
-                    itemName = info.ItemName.Split('#')[language];
+                    itemName = ItemInfoManager.Instance.GetName(id).Split('#')[language];
                 }
                 catch
                 {
 
                 }
-                
+
                 ItemDescription.transform.GetChild(0).GetComponent<Text>().text = itemName + "\n\n" + des;
             }
             //非第一次
