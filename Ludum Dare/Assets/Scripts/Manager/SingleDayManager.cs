@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using FE_EventInfo;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,6 +36,8 @@ public class SingleDayManager : MonoBehaviour
     //负责生成事件
     public void GenerateEvent()
     {
+        //TODO:生成事件需要小改
+
         //事件个数
         int EventAmount = Random.Range(1, 2);
         int rEventID1 = 0;
@@ -49,10 +52,10 @@ public class SingleDayManager : MonoBehaviour
             while (true)
             {
                 //取得事件
-                rEventID1 = Random.Range(0, EventInfoManager.Instance.EventInfoListCount);
+                rEventID1 = Random.Range(0, EventInfoManager.DayEventsCount);
 
                 //判断能不能用
-                if (GameManager.Instance.TryEvent(rEventID1,out id1))
+                if (PlayerModel.TryEvent(rEventID1,out id1))
                 {
                     break;
                 }
@@ -66,7 +69,7 @@ public class SingleDayManager : MonoBehaviour
             Events.Add(NewEvent1);                                      //加入数组
 
             //初始化生成的event
-            NewEvent1.InIt(EventInfoManager.Instance.GetInfo(id1));
+            NewEvent1.InIt(EventInfoManager.GetInfo(rEventID1));
             //计入经历过的事件
             PlayerModel.Instance.AddExpEvents(id1);
         }
@@ -77,11 +80,11 @@ public class SingleDayManager : MonoBehaviour
             //Debug.Log("生成第2个事件");
             while (true)
             {
-                rEventID2 = Random.Range(0, EventInfoManager.Instance.EventInfoListCount);
+                rEventID2 = Random.Range(0, EventInfoManager.DayEventsCount);
                 if (rEventID2 != rEventID1)
                 {
                     //判断能不能用
-                    if (GameManager.Instance.TryEvent(rEventID2,out id2))
+                    if (PlayerModel.TryEvent(rEventID2,out id2))
                     {
                         break;
                     }
@@ -95,7 +98,7 @@ public class SingleDayManager : MonoBehaviour
             Events.Add(NewEvent2);                                                     //加入数组
 
             //初始化生成的event
-            NewEvent2.InIt(EventInfoManager.Instance.GetInfo(rEventID2));
+            NewEvent2.InIt(EventInfoManager.GetInfo(rEventID2));
             PlayerModel.Instance.AddExpEvents(id2);
         }
 

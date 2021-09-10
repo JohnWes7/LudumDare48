@@ -1,0 +1,59 @@
+{
+    "Discovery_of_oil": {
+        "Eventtitle": "\u53D1\u73B0\u77F3\u6CB9#Discovery of oil",
+        "Desciption": "\u4F60\u627E\u5230\u4E86\u4E00\u4E2A\u4EBA\u7C7B\u9057\u7559\u7684\u77F3\u6CB9\u7CBE\u70BC\u5668\uFF0C\u7CBE\u70BC\u5668\u5DF2\u7ECF\u635F\u574F\uFF0C\u4F46\u4F60\u53EF\u4EE5\u7528\u81EA\u5E26\u7684\u7CBE\u70BC\u5668\u5C06\u5176\u8F6C\u5316\u4E3A\u80FD\u6E90\uFF0C\u4F46\u8FD9\u5C06\u6D88\u8017\u5927\u91CF\u80FD\u6E90\uFF0C\u5E76\u4E14\u8FD9\u6279\u77F3\u6CB9\u7684\u54C1\u8D28\u4EE4\u4EBA\u62C5\u5FE7#You find an oil refiner left by humans. The refiner is damaged, but you can use your own refiner to turn it into energy, but it will consume a lot of energy, and the quality of the oil is worrying",
+        "Icon": "Doo",
+        "Precondition": null,
+        "EventChain": null,
+        
+        "Options": [
+            {
+                "Label": "\u65E2\u7136\u5E26\u4E86\u7CBE\u70BC\u5668\u5C31\u6CA1\u6709\u4E0D\u7528\u7684\u9053\u7406#Now that you have the refiner there's no reason not to use it",
+                
+                "Add_Health": 0,
+                "Add_Energy": -10,
+                "Add_Item": [
+                    "The_mouse_tail.get"
+                ],
+
+                "RandomParts": [
+                    {
+                        "randomModifies": [
+                            {
+                                "percentage": 0.2,
+                                "Add_Health": 0,
+                                "Add_Energy": 0,
+                                "Add_Item": null
+                            },
+                            {
+                                "percentage": 0.3,
+                                "Add_Health": 0,
+                                "Add_Energy": 7,
+                                "Add_Item": null
+                            },
+                            {
+                                "percentage": 0.4,
+                                "Add_Health": 0,
+                                "Add_Energy": 15,
+                                "Add_Item": null
+                            },
+                            {
+                                "percentage": 0.1,
+                                "Add_Health": 0,
+                                "Add_Energy": 25,
+                                "Add_Item": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "Label": "\u7CBE\u70BC\u5668\u653E\u7740\u4E0D\u7528\u4E5F\u4E0D\u4F1A\u751F\u9508#The refiner does not rust when left unused",
+                "Add_Health": 0,
+                "Add_Energy": 0,
+                "Add_Item": null,
+                "RandomParts": null
+            }
+        ]
+    }
+}

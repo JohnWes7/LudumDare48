@@ -14,6 +14,12 @@ public class StartPannelController : MonoBehaviour
     public GameObject OptionsPanelPrefab;
 
     #region debug
+
+    private void Start()
+    {
+        FE_EventInfo.EventInfoManager.DEBUG();
+    }
+
     //private void Start()
     //{
     //    EventInfo eventInfo = new EventInfo();

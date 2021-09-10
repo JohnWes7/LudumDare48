@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using FE_EventInfo;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,6 @@ public class OptionButtonController : MonoBehaviour
 
     public void InIt(Option option)
     {
-        this.label.text = option.Label;
+        this.label.text = option.label;
     }
 }

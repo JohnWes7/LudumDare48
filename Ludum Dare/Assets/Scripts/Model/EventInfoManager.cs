@@ -3,296 +3,123 @@ using System.Collections.Generic;
 using UnityEngine;
 using LitJson;
 
-public class EventInfoManager : Single<EventInfoManager>
+namespace FE_EventInfo
 {
-    /// <summary>
-    /// 存有所有事件数据的列表
-    /// </summary>
-    //private List<EventInfo> EventInfoList { get; }
-    private Dictionary<string, EventInfo> EventInfoTable { get; }
-
-    /// <summary>
-    /// 整个事件列表的长度
-    /// </summary>
-    public int EventInfoListCount { get { return EventInfoTable.Count; } }
-
-    /// <summary>
-    /// 构造函数
-    /// </summary>
-    public EventInfoManager()
+    public class EventInfoManager : Single<EventInfoManager>
     {
-        //读取json
-        string json = Resources.Load<TextAsset>(Config.EventInfoJsonPath).text;
-        //转换成table
-        EventInfoTable = JsonMapper.ToObject<Dictionary<string, EventInfo>>(json);
+        /// <summary>
+        /// 存有所有事件数据的工具类
+        /// </summary>
+        private Events events;
 
-        #region Debug打印
-        Debug.Log(json);
-        #endregion
+        /// <summary>
+        /// 整个事件列表的长度
+        /// </summary>
+        public static int DayEventsCount { get { return Instance.events.DayEvents.Count; } }
 
-        foreach (var item in EventInfoTable)
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public EventInfoManager()
         {
-            item.Value.Id = item.Key;
+            //读取json
+            string json = Resources.Load<TextAsset>(Config.EventInfoJsonPath).text;
+            //将自己的json转入数据
+            Events default_event = JsonMapper.ToObject<Events>(json);
+
+            //TODO:之后可能还要在里面转如玩家的数据
+
+            #region Debug打印
+            Debug.Log(json);
+            #endregion
+
+            this.events = default_event;
         }
-    }
 
-    public EventInfo GetInfo(string Id)
-    {
-        EventInfo eventInfo;
-        EventInfoTable.TryGetValue(Id, out eventInfo);
-
-        return eventInfo;
-    }
-
-    public EventInfo GetInfo(int index)
-    {
-        if (index < EventInfoTable.Count)
+        public static void DEBUG()
         {
-            int i = 0;
-            foreach (KeyValuePair<string, EventInfo> item in EventInfoTable)
+            for (int i = 0; i < DayEventsCount; i++)
             {
-                if (index == i++)
+                Instance.events.DayEvents[i].PrintSelf();
+            }
+        }
+
+        /// <summary>
+        /// 获取事件信息 默认获取
+        /// </summary>
+        /// <param name="id">事件代码</param>
+        /// <returns></returns>
+        public static EventInfo GetInfo(string id)
+        {
+            for (int i = 0; i < DayEventsCount; i++)
+            {
+                if (Instance.events.DayEvents[i].id == id)
                 {
-                    return item.Value;
+                    return Instance.events.DayEvents[i];
                 }
             }
+
+            return null;
         }
 
-        Debug.LogError("索引到空引用 index：" + index);
-        return null;
+        /// <summary>
+        /// 获取事件信息
+        /// </summary>
+        /// <param name="index">事件索引</param>
+        /// <returns></returns>
+        public static EventInfo GetInfo(int index)
+        {
+            if (index > 0 && index < DayEventsCount)
+            {
+                return Instance.events.DayEvents[index];
+            }
+
+            return null;
+        }
     }
-}
-
-public class IDInfoPair
-{
-    public KeyValuePair<string, EventInfo> keyValuePair;
-
-    public IDInfoPair(KeyValuePair<string, EventInfo> keyValuePair)
-    {
-        this.keyValuePair = keyValuePair;
-    }
-}
-
-public class EventInfo
-{
-    public string Id { get; set; }
-    public string Eventtitle { get; set; }
-    public string Desciption { get; set; }
-    public string Icon { get; set; }
-    public string Precondition { get; set; }
-    public string EventChain { get; set; }
-
-    public List<Option> Options { get; set; }
-
-    public void PrintSelf()
-    {
-        Debug.Log(Id + "\n" + this.Eventtitle + "\n" + Desciption + "\n" + Icon + "\n" + (Precondition == null ? "null" : EventChain) + "\n" + (EventChain == null ? "null" : EventChain));
-
-    }
-}
-
-/// <summary>
-/// 单项操作
-/// </summary>
-public class Option
-{
-    public string Label;
-
-    public int Add_Health;
-    public int Add_Energy;
-    public List<string> Add_Item;
 
     /// <summary>
-    /// 多次判定
+    /// 用来导入数据的工具类（json按照该类导入）
     /// </summary>
-    public List<RandomPart> RandomParts;
-
-    public string ExecuteOption(PlayerModel playerModel)
+    public class Events
     {
-
-        int deltahp = Add_Health;
-        int deltaenerfy = Add_Energy;
-        List<string> add_Item = new List<string>();
-
-        if (Add_Item != null)
-            add_Item.AddRange(Add_Item);
-
-        if (RandomParts != null)
-        {
-            for (int i = 0; i < RandomParts.Count; i++)
-            {
-                //多次随机判定中的单次
-                if (RandomParts[i].randomModifies == null)
-                    continue;
-
-                int hptemp;
-                int energytemp;
-                List<string> itemtemp;
-
-                RandomParts[i].ExecuteRandomPart(out hptemp, out energytemp, out itemtemp);
-
-                deltahp += hptemp;
-                deltaenerfy += energytemp;
-                add_Item.AddRange(itemtemp);
-            }
-        }
-
-        //所有的执行完 更改modle
-        if (playerModel != null)
-        {
-            playerModel.ChangeHp(deltahp);
-            playerModel.ChangeEnery(deltaenerfy);
-            playerModel.ChangeItemList(add_Item);
-        }
-
-        //生成事件报告给玩家
-        return ProduceReport(deltahp, deltaenerfy, add_Item);
+        public List<EventInfo> DayEvents;
     }
 
-    public static string ProduceReport(int deltahp, int deltaenerfy, List<string> add_Item)
+    public class EventInfo
     {
-        string addDescip = "\n\n";
+        public string id { get; set; }
+        public string event_title { get; set; }
+        public string description { get; set; }
+        public string icon { get; set; }
+        public Precondition precondition { get; set; }
+        public string event_chain { get; set; }
 
-        //血量
-        if (deltahp > 0)
+        public List<Option> options { get; set; }
+
+        public void PrintSelf()
         {
-            addDescip += "Durability: +" + deltahp.ToString() + "\n";
+            Debug.Log("id: "+ id + "\n" +"title: " +this.event_title + "\ndescription: " + description + "\nicon: " + icon + "\nprecondition: " + (precondition == null ? "null" : precondition.ToString()) + "\nevent_chain: " + (event_chain == null ? "null" : event_chain));
+
         }
-        else if (deltahp < 0)
-        {
-            addDescip += "Durability: " + deltahp.ToString() + "\n";
-        }
-
-        //能量
-        if (deltaenerfy > 0)
-        {
-            addDescip += "Fuel: +" + deltaenerfy.ToString() + "\n";
-        }
-        else if (deltaenerfy < 0)
-        {
-            addDescip += "Fuel: " + deltaenerfy.ToString() + "\n";
-        }
-
-        //遗物
-        bool judgelost = false;
-        bool judgeget = false;
-        string get = "Get item : ";
-        string lost = "Lost item : ";
-
-        for (int i = 0; i < add_Item.Count; i++)
-        {
-            //[0]物品的id [1]物品的得到与失去
-            string[] modify = add_Item[i].Split('.');
-            string id = modify[0];
-
-            string gl = null;
-            if (modify.Length > 0)
-            {
-                gl = modify[1];
-            }
-
-            //获得名字
-            string[] ItemName = ItemInfoManager.Instance.Get(id).ItemName.Split('#');
-            //获得语言
-            int language = PlayerPrefs.GetInt("Language", (int)Config.Language.CH);
-
-            if (gl != null)
-            {
-                if (gl == "get")
-                {
-                    judgeget = true;
-                    get += ItemName[language];
-                }
-
-                if (gl == "lost")
-                {
-                    judgelost = true;
-                    lost += ItemName[language];
-                }
-            }
-            //如果没有标记当作得到处理
-            else
-            {
-                judgeget = true;
-                get += ItemName[language];
-            }
-        }
-
-        if (judgeget)
-        {
-            addDescip += get + "\n";
-        }
-
-        if (judgelost)
-        {
-            addDescip += lost + "\n";
-        }
-
-        return addDescip;
     }
+
+
 }
 
-/// <summary>
-/// 单次判定用的类
-/// </summary>
-public class RandomPart
-{
-    /// <summary>
-    /// 多个百分比
-    /// </summary>
-    public List<RandomModify> randomModifies;
 
-    public void ExecuteRandomPart(out int addHealth, out int addEnergy, out List<string> add_Item)
-    {
-        float judge = Random.value;
 
-        float IntervalMax = 0;
-        float IntervalMin = 0;
+#region 废弃的代码
+//public class IDInfoPair
+//{
+//    public KeyValuePair<string, EventInfo> keyValuePair;
 
-        for (int j = 0; j < randomModifies.Count; j++)
-        {
-            RandomModify randomModify = randomModifies[j];
-
-            IntervalMax += randomModify.percentage;
-
-            //如果随机到了该modify则执行
-            if (judge >= IntervalMin && judge <= IntervalMax)
-            {
-                randomModify.ExecuteModify(out addHealth, out addEnergy, out add_Item);
-                Debug.Log(judge + "  " + addHealth + "  " + addEnergy);
-                return;
-            }
-
-            IntervalMin = IntervalMax;
-        }
-
-        add_Item = null;
-        addHealth = 0;
-        addEnergy = 0;
-    }
-}
-
-/// <summary>
-/// 一次判定中某一项所占的百分比
-/// </summary>
-public class RandomModify
-{
-    public float percentage;
-
-    public int Add_Health;
-    public int Add_Energy;
-    public List<string> Add_Item;
-
-    public void ExecuteModify(out int addHealth, out int addEnergy, out List<string> add_Item)
-    {
-        add_Item = new List<string>();
-        if (Add_Item != null)
-            add_Item.AddRange(Add_Item);
-        addHealth = Add_Health;
-        addEnergy = Add_Energy;
-    }
-}
-
+//    public IDInfoPair(KeyValuePair<string, EventInfo> keyValuePair)
+//    {
+//        this.keyValuePair = keyValuePair;
+//    }
+//}
 
 ////old神必堡垒 解码器
 //public void EventDecoder(string change)
@@ -428,3 +255,4 @@ public class RandomModify
 //    //事件完成标记
 //    mEventController.SetIsDone(true);
 //}
+#endregion

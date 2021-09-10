@@ -383,7 +383,8 @@ namespace LitJson
             context.ExpectingValue = false;
         }
 
-        [CLSCompliant(false)]
+        //TODO:这里更改过CLS
+        //[CLSCompliant(false)]
         public void Write (ulong number)
         {
             DoValidation (Condition.Value);

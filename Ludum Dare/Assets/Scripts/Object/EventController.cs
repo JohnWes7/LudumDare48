@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using FE_EventInfo;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
@@ -23,10 +24,10 @@ public class EventController : MonoBehaviour
         //初始化
         {
             //改名字 
-            gameObject.name = "event_" + this.eventInfo.Id;
+            gameObject.name = "event_" + this.eventInfo.id;
 
             //根据列表替换显示的图(这一句之后不会是赋值会是直接读取)
-            string propertyImageName = eventInfo.Icon;
+            string propertyImageName = eventInfo.icon;
             
             //进行操作
             string[] strName = propertyImageName.Split('#');

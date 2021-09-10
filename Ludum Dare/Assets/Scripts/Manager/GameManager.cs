@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using DG.Tweening;
+using FE_EventInfo;
 
 /// <summary>
 /// 主要负责跳转场景，以及动画
@@ -184,36 +185,6 @@ public class GameManager : MonoBehaviour
         //执行回调函数
         unityAction.Invoke();
     }
-
-    public bool TryEvent(int index, out string id)
-    {
-        EventInfo eventInfo = EventInfoManager.Instance.GetInfo(index);
-        id = eventInfo.Id;
-
-        //如果是null代表可重复出现
-        if (eventInfo.Precondition == null)
-        {
-            return true;
-        }
-        else
-        {
-            //如果这个事件之前出现过，就false
-            bool judge1 = !PlayerModel.Instance.ExpEventsList.Contains(eventInfo.Id);
-            bool judge2 = true;
-
-            //如果是 需要条件 的 非开头 事件链 则判断满不满足
-            //if (eventInfo.Precondition > 0)
-            //{
-            //    //与遗物来进行判断
-            //    //如果没有满足这个的条件，false
-            //    judge2 = PlayerModel.Instance.ItemIDList.Contains(eventInfo.Precondition);
-            //}
-            
-
-            return judge1 && judge2;
-        }
-    }
-
 
     public void Dead()
     {

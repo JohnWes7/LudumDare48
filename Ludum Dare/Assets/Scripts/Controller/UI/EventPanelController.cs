@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using FE_EventInfo;
 
 public class EventPanelController : MonoBehaviour
 {
@@ -37,15 +38,15 @@ public class EventPanelController : MonoBehaviour
         int language = PlayerPrefs.GetInt("Language", (int)Config.Language.CH);
 
         //更改标题
-        Title.text = evenInfo.Eventtitle.Split('#')[language];
+        Title.text = evenInfo.event_title.Split('#')[language];
 
         //更改描述
-        Desciption.text = evenInfo.Desciption.Split('#')[language];
+        Desciption.text = evenInfo.description.Split('#')[language];
 
         //显示选项
-        for (int i = 0; i < evenInfo.Options.Count; i++)
+        for (int i = 0; i < evenInfo.options.Count; i++)
         {
-            Option option = evenInfo.Options[i];
+            Option option = evenInfo.options[i];
             OptionButtonController newOption = Instantiate<GameObject>(OptionPrefab, OptionsParent).GetComponent<OptionButtonController>();
             newOption.InIt(option);
             newOption.button.onClick.AddListener(() => { Execute(option); });

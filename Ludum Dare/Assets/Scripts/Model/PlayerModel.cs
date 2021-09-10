@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using FE_EventInfo;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,6 +28,25 @@ public class PlayerModel : Single<PlayerModel>
         ExpEventsList = new List<string>();
         ItemIDList = new List<string>();
         isDead = false;
+    }
+
+    public static bool TryEvent(int index, out string id)
+    {
+        //TODO:尝试生成事件判定
+        EventInfo eventInfo = EventInfoManager.GetInfo(index);
+        id = eventInfo.id;
+
+        //如果是null代表可重复出现
+        if (eventInfo.precondition == null)
+        {
+            return true;
+        }
+        else
+        {
+            //TODO:这里要写生成事件的判定
+
+            return true;
+        }
     }
 
     public void IncreaseDay()
