@@ -12,6 +12,6 @@ public class OptionButtonController : MonoBehaviour
 
     public void InIt(Option option)
     {
-        this.label.text = option.label;
+        this.label.text = EventTextManage.GetText(option.Label, (Config.Language)PlayerPrefs.GetInt("Language", 0));
     }
 }

@@ -30,23 +30,24 @@ public class EventPanelController : MonoBehaviour
     public void InIt(EventInfo Info, EventController mEventController)
     {
         //改自身属性
-        gameObject.name = "event_" + Info.ToString();
+        gameObject.name = "event_" + Info.Id;
         this.evenInfo = Info;
         this.mEventController = mEventController;
 
         //获取语言
-        int language = PlayerPrefs.GetInt("Language", (int)Config.Language.CH);
+        Config.Language language = (Config.Language)PlayerPrefs.GetInt("Language", (int)Config.Language.l_simp_chinese);
+
 
         //更改标题
-        Title.text = evenInfo.event_title.Split('#')[language];
+        Title.text = EventTextManage.GetText(Info.Event_title, language);
 
         //更改描述
-        Desciption.text = evenInfo.description.Split('#')[language];
+        Desciption.text = EventTextManage.GetText(Info.Description, language);
 
         //显示选项
-        for (int i = 0; i < evenInfo.options.Count; i++)
+        for (int i = 0; i < evenInfo.Options.Count; i++)
         {
-            Option option = evenInfo.options[i];
+            Option option = evenInfo.Options[i];
             OptionButtonController newOption = Instantiate<GameObject>(OptionPrefab, OptionsParent).GetComponent<OptionButtonController>();
             newOption.InIt(option);
             newOption.button.onClick.AddListener(() => { Execute(option); });

@@ -17,7 +17,11 @@ public class StartPannelController : MonoBehaviour
 
     private void Start()
     {
+        FE_EventInfo.EventInfoManager.ManuallyInit();
         FE_EventInfo.EventInfoManager.DEBUG();
+
+        FE_EventInfo.EventTextManage.ManuallyInit();
+        FE_EventInfo.EventTextManage.DEBUG();
     }
 
     //private void Start()

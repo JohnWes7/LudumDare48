@@ -6,8 +6,8 @@ using UnityEngine.U2D;
 
 public class EventController : MonoBehaviour
 {
-    [Header("该事件属性")]
-    public EventInfo eventInfo;
+    [Header("该事件属性"),SerializeField]
+    private EventInfo eventInfo;
     public bool isDone;
 
     [Header("显示相关")]
@@ -21,40 +21,10 @@ public class EventController : MonoBehaviour
         //获取事件ID
         this.eventInfo = info;
 
-        //初始化
-        {
-            //改名字 
-            gameObject.name = "event_" + this.eventInfo.id;
+        //改名字 
+        gameObject.name = "event_" + this.eventInfo.Id;
 
-            //根据列表替换显示的图(这一句之后不会是赋值会是直接读取)
-            string propertyImageName = eventInfo.icon;
-            
-            //进行操作
-            string[] strName = propertyImageName.Split('#');
-            Sprite eventImage = null;
-
-            //Debug.Log(strName.Length);
-
-            if (strName.Length > 1)
-            {
-                string path = Config.EventIconPath + strName[0];
-                //导入要切的图
-                Sprite[] eventSpriteAtlas = Resources.LoadAll<Sprite>(path);
-
-                eventImage = eventSpriteAtlas[int.Parse(strName[1])];
-            }
-            else
-            {
-                string path = Config.EventIconPath + strName[0];
-                //Debug.Log(path);
-                eventImage = Resources.Load<Sprite>(path);
-            }
-
-            if (eventImage)
-            {
-                mSpriteRenderer.sprite = eventImage;
-            }
-        }
+        ChangeIcon(info.Icon);
     }
 
 
@@ -109,5 +79,43 @@ public class EventController : MonoBehaviour
     {
         this.isDone = isdone;
         SingleDayManager.ToDay.TryOpenRoad();
+    }
+
+    public void ChangeIcon(string PATH)
+    {
+        //根据列表替换显示的图(这一句之后不会是赋值会是直接读取)
+
+        
+        string[] strName = PATH.Split('#'); //进行分割
+
+        Sprite eventImage = null;   //图片变量
+
+        //分割成功进行图集操作
+        if (strName.Length > 1)
+        {
+            string path = Config.EventIconPath + strName[0];
+            //导入要切的图
+            Sprite[] eventSpriteAtlas = Resources.LoadAll<Sprite>(path);
+
+            eventImage = eventSpriteAtlas[int.Parse(strName[1])];
+        }
+        //失败进行图片操作
+        else
+        {
+            string path = Config.EventIconPath + strName[0];
+            eventImage = Resources.Load<Sprite>(path);
+        }
+
+
+        //最后赋值显示
+        if (eventImage)
+        {
+            mSpriteRenderer.sprite = eventImage;
+        }
+    }
+
+    public string GetID()
+    {
+        return this.eventInfo.Id;
     }
 }

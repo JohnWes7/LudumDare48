@@ -20,4 +20,15 @@ public class Single<T> where T:new()
             return instance;
         }
     }
+
+    /// <summary>
+    /// 手动初始化会调用默认的构造函数
+    /// </summary>
+    public static void ManuallyInit()
+    {
+        if (instance == null)
+        {
+            instance = new T();
+        }
+    }
 }

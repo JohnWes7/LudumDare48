@@ -20,7 +20,7 @@ public class OptionsPanelController : MonoBehaviour
         int resolutionValue = PlayerPrefs.GetInt("Resolution", 0);
         ResolutionDropdown.value = resolutionValue;
 
-        int languageValue = PlayerPrefs.GetInt("Language", (int)Config.Language.CH);
+        int languageValue = PlayerPrefs.GetInt("Language", (int)Config.Language.l_simp_chinese);
         LanguageDropdown.value = languageValue;
     }
 
