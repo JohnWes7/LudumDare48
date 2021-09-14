@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this);
 
         //初始数值
-        PlayerModel.Instance.InIt();
+        PlayerModel.InIt();
 
         //开始跳转
         string laber = "Day : " + PlayerModel.Instance.GameDay.ToString();

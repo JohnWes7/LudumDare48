@@ -50,15 +50,15 @@ public class EventPanelController : MonoBehaviour
             Option option = evenInfo.Options[i];
             OptionButtonController newOption = Instantiate<GameObject>(OptionPrefab, OptionsParent).GetComponent<OptionButtonController>();
             newOption.InIt(option);
-            newOption.button.onClick.AddListener(() => { Execute(option); });
+            newOption.button.onClick.AddListener(() => { Execute(option, evenInfo.Event_chain); });
             OptionList.Add(newOption);
         }
 
     }
 
-    public void Execute(Option option)
+    public void Execute(Option option, string chain)
     {
-        string addDes = option.ExecuteOption(PlayerModel.Instance);
+        string addDes = option.ExecuteOption(PlayerModel.Instance, chain);
         AddDescription(addDes);
         CloseOption();
         Done();

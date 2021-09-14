@@ -10,69 +10,90 @@ public class PlayerModel : Single<PlayerModel>
 {
     [Header("玩家基本信息")]
     [SerializeField, Tooltip("统计天数（关卡）")]
-    public int Hp;
-    public int Energy;
-    public int GameDay;
-    public int Score;
-    public List<string> ItemIDList { get; set; }
+    private int hp;
+    private int energy;
+    private int gameDay;
+    private int score;
+    private List<string> itemIDList;
+    
 
-    //TODO:玩家数据要更改 添加经过事件 逻辑判断联动
     private PlayerEventsStatistics eventStatistics;
+
+    public List<string> ItemIDList { get => itemIDList; }
+    public int GameDay { get => gameDay; }
+    public int Hp { get => hp;  }
+    public int Energy { get => energy;  }
+    public int Score { get => score;  }
+    public PlayerEventsStatistics EventStatistics { get => eventStatistics; }
 
     [SerializeField]
     private bool isDead = false;
-
-    public void InIt()
+    
+    /// <summary>
+    /// 手动初始化
+    /// </summary>
+    public static void InIt()
     {
-        GameDay = 1;
-        Hp = 100;
-        Energy = 100;
-        Score = 0;
-        ItemIDList = new List<string>();
-        isDead = false;
-        eventStatistics = new PlayerEventsStatistics();
+        ManuallyInit();
+        Instance.gameDay = 1;
+        Instance.hp = 100;
+        Instance.energy = 100;
+        Instance.score = 0;
+        Instance.itemIDList = new List<string>();
+        Instance.isDead = false;
+        Instance.eventStatistics = new PlayerEventsStatistics();
     }
 
+    public static bool TryEvent(EventInfo eventInfo)
+    {
+        if (eventInfo != null)
+        {
+            return eventInfo.TryPrecondition(Instance.EventStatistics);
+        }
+
+        Debug.LogWarning("需要进行事件前置检测的eventInfo 为null （来自PlayerModel.TryEvent）");
+        return false;
+    }
     public static bool TryEvent(int index, out string id)
     {
         EventInfo eventInfo = EventInfoManager.GetInfo(index);
         if (eventInfo == null)
         {
-            Debug.Log("没有索引到！！index："+index);
+            Debug.Log("没有索引到！！index：" + index);
             id = null;
             return false;
         }
 
         id = eventInfo.Id;
-
-        //如果是null代表可重复出现
-        if (eventInfo.Precondition== null)
+        return TryEvent(eventInfo); 
+    }
+    public static bool TryEvent(int index)
+    {
+        EventInfo eventInfo = EventInfoManager.GetInfo(index);
+        if (eventInfo == null)
         {
-            return true;
+            Debug.Log("没有索引到！！index：" + index);
+            return false;
         }
-        else
-        {
-            //TODO:这里要写生成事件的判定
 
-            return true;
-        }
+        return TryEvent(eventInfo);
     }
 
     public void IncreaseDay()
     {
-        GameDay++;
+        gameDay++;
     }
 
     public void ChangeEnery(int deltaEnergy)
     {
         //更改数值
-        this.Energy = Mathf.Clamp(this.Energy + deltaEnergy, 0, 100);
+        this.energy = Mathf.Clamp(this.Energy + deltaEnergy, 0, 100);
 
         //更新ui显示
         GameBasePanelController cbpc = GameObject.Find("Canvas/GameBasePanel").GetComponent<GameBasePanelController>();
         if (cbpc)
             cbpc.UpdateEnergy(this.Energy);
-        
+
         if (this.Energy <= 0)
         {
             if (isDead == false)
@@ -87,7 +108,7 @@ public class PlayerModel : Single<PlayerModel>
     public void ChangeHp(int deltaHp)
     {
         //更改数值
-        this.Hp = Mathf.Clamp(this.Hp + deltaHp, 0, 100);
+        this.hp = Mathf.Clamp(this.Hp + deltaHp, 0, 100);
 
         //更新ui显示
         GameBasePanelController cbpc = GameObject.Find("Canvas/GameBasePanel").GetComponent<GameBasePanelController>();
@@ -107,7 +128,18 @@ public class PlayerModel : Single<PlayerModel>
 
     public void AddExpEvents(string chain, string str)
     {
-        eventStatistics.Put(chain, str);
+        EventStatistics.Put(chain, str);
+    }
+
+    public void AddExpEvents(string chain, List<string> str_list)
+    {
+        if (str_list != null)
+        {
+            for (int i = 0; i < str_list.Count; i++)
+            {
+                AddExpEvents(chain, str_list[i]);
+            }
+        }
     }
 
     public void ChangeItemList(string item_change)
@@ -119,6 +151,7 @@ public class PlayerModel : Single<PlayerModel>
         //如果没有这一项物品直接跳过
         if (ItemInfoManager.Instance.Get(id) == null)
         {
+            Debug.LogWarning("未找到该遗物 " + id + " ,没有加入到player items");
             return;
         }
 
@@ -148,7 +181,7 @@ public class PlayerModel : Single<PlayerModel>
 
         //更新显示
         GameBasePanelController cbpc = GameObject.Find("Canvas/GameBasePanel").GetComponent<GameBasePanelController>();
-        if(cbpc)
+        if (cbpc)
             cbpc.UpdateItems(ItemIDList);
 
     }
@@ -166,13 +199,13 @@ public class PlayerModel : Single<PlayerModel>
 
     public void CaculateScore()
     {
-        Score = 0;
+        score = 0;
         //计算分数
         for (int i = 0; i < ItemIDList.Count; i++)
         {
             ItemInfo info = ItemInfoManager.Instance.Get(ItemIDList[i]);
-            Score += info.Score * 50;
+            score += info.Score * 50;
         }
-        Score += GameDay * 10;
+        score += GameDay * 10;
     }
 }

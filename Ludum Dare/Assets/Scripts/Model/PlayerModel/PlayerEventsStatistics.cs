@@ -12,6 +12,8 @@ public class PlayerEventsStatistics
     {
         List<string> chain = null;
 
+        eventChain = eventChain == null ? "null" : eventChain;  
+
         //如果已经有对应的列表 直接加入
         if (data.TryGetValue(eventChain, out chain))
         {
@@ -40,9 +42,17 @@ public class PlayerEventsStatistics
         return false;
     }
 
+    /// <summary>
+    /// 是否含有该判定
+    /// </summary>
+    /// <param name="chain">keyi</param>
+    /// <param name="str"></param>
+    /// <returns></returns>
     public bool Contains(string chain, string str)
     {
         List<string> list = null;
+
+        chain = chain == null ? "null" : chain;
 
         if (data.TryGetValue(chain, out list))
         {

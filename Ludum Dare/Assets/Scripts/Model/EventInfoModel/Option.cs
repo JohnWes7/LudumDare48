@@ -16,8 +16,6 @@ namespace FE_EventInfo
         /// </summary>
         [JsonProperty]
         private string label;
-        public string Label { get => label; }
-
         /// <summary>
         /// 固定体力增加量（负数为扣除）
         /// </summary>
@@ -37,49 +35,67 @@ namespace FE_EventInfo
         /// 增加固定事件判断代码
         /// </summary>
         [JsonProperty]
-        private List<string> add_events;
-
+        private List<string> add_event;
         /// <summary>
         /// 多次判定
         /// </summary>
         [JsonProperty]
         private List<RandomPart> random_parts;
 
-        
+        public string Label { get => label; }
+        public int Add_health { get => add_health; }
+        public int Add_energy { get => add_energy; }
+        public List<string> Add_item { get => add_item; }
+        public List<string> Add_events { get => add_event; }
 
         /// <summary>
         /// 执行这项选择
         /// </summary>
         /// <param name="playerModel">玩家数据模型</param>
         /// <returns></returns>
-        public string ExecuteOption(PlayerModel playerModel)
+        public string ExecuteOption(PlayerModel playerModel, string chain)
         {
-            //TODO:判断要加addevent
-            int deltahp = add_health;
-            int deltaenerfy = add_energy;
+            //怎加固定基础属性改变
+            int deltahp = Add_health;
+            int deltaenerfy = Add_energy;
+
             List<string> add_Item = new List<string>();
+            List<string> add_Events = new List<string>();
+            //增加固定物品
+            if (this.Add_item != null)
+                add_Item.AddRange(Add_item);
+            //增加固定事件代码
+            if (this.Add_events != null)
+            {
+                add_Events.AddRange(this.Add_events);
+            }
 
-            //如果没有物品变化就不管
-            if (add_item != null)
-                add_Item.AddRange(add_item);
-
-            if (random_parts != null)
+            //增加判断事件
+            if (this.random_parts != null)
             {
                 for (int i = 0; i < random_parts.Count; i++)
                 {
                     //多次随机判定中的单次
-                    if (random_parts[i].random_modifies == null)
+                    if (random_parts[i].Random_modifies == null)
                         continue;
 
-                    int hptemp;
-                    int energytemp;
-                    List<string> itemtemp;
+                    int hp_temp;
+                    int energy_temp;
+                    List<string> item_temp;
+                    List<string> event_temp;
 
-                    random_parts[i].ExecuteRandomPart(out hptemp, out energytemp, out itemtemp);
+                    random_parts[i].ExecuteRandomPart(out hp_temp, out energy_temp, out item_temp, out event_temp);
 
-                    deltahp += hptemp;
-                    deltaenerfy += energytemp;
-                    add_Item.AddRange(itemtemp);
+                    deltahp += hp_temp;
+                    deltaenerfy += energy_temp;
+                    if (item_temp != null)
+                    {
+                        add_Item.AddRange(item_temp);
+                    }
+                    if (event_temp!=null)
+                    {
+                        add_Events.AddRange(event_temp);
+                    }
                 }
             }
 
@@ -89,16 +105,17 @@ namespace FE_EventInfo
                 playerModel.ChangeHp(deltahp);
                 playerModel.ChangeEnery(deltaenerfy);
                 playerModel.ChangeItemList(add_Item);
+                playerModel.AddExpEvents(chain, add_Events);
             }
 
             Debug.Log("已执行选项deltahp: " + deltahp + " " + " deltaenerfy: " + deltaenerfy);
             //生成事件报告给玩家
             return ProduceReport(deltahp, deltaenerfy, add_Item);
         }
-
         //事件报告
         public static string ProduceReport(int deltahp, int deltaenerfy, List<string> add_Item)
         {
+            //TODO:事件报告可能需要更改 滚动text debug
             string addDescip = "\n\n";
 
             //血量
@@ -140,7 +157,7 @@ namespace FE_EventInfo
                 //如果信息出错直接下一个
                 if (itemInfo == null)
                 {
-                    Debug.LogError("没有找到该物品 已跳过：" + add_Item[i]);
+                    Debug.LogWarning("没有找到该物品 已跳过：" + add_Item[i]);
                     continue;
                 }
                 else
@@ -193,6 +210,7 @@ namespace FE_EventInfo
 
             return addDescip;
         }
+
         public override string ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();
@@ -201,28 +219,28 @@ namespace FE_EventInfo
             stringBuilder.Append(Label);
             stringBuilder.Append("\n");
             stringBuilder.Append("add_health: ");
-            stringBuilder.Append(add_health);
+            stringBuilder.Append(Add_health);
             stringBuilder.Append("\n");
             stringBuilder.Append("add_energy: ");
-            stringBuilder.Append(add_energy);
+            stringBuilder.Append(Add_energy);
             stringBuilder.Append("\n");
-            if (add_item != null)
+            if (Add_item != null)
             {
-                for (int i = 0; i < add_item.Count; i++)
+                for (int i = 0; i < Add_item.Count; i++)
                 {
                     stringBuilder.Append(i);
                     stringBuilder.Append(" add_item: ");
-                    stringBuilder.Append(add_item[i]);
+                    stringBuilder.Append(Add_item[i]);
                     stringBuilder.Append("\n");
                 }
             }
-            if (this.add_events != null)
+            if (this.Add_events != null)
             {
-                for (int i = 0; i < add_events.Count; i++)
+                for (int i = 0; i < Add_events.Count; i++)
                 {
                     stringBuilder.Append(i);
                     stringBuilder.Append(" add_events: ");
-                    stringBuilder.Append(add_events[i]);
+                    stringBuilder.Append(Add_events[i]);
                     stringBuilder.Append("\n");
                 }
             }
@@ -251,25 +269,28 @@ namespace FE_EventInfo
         /// <summary>
         /// 多个百分比
         /// </summary>
-        public List<RandomModify> random_modifies;
+        [JsonProperty]
+        private List<RandomModify> random_modifies;
 
-        public void ExecuteRandomPart(out int addHealth, out int addEnergy, out List<string> add_Item)
+        public List<RandomModify> Random_modifies { get => random_modifies; }
+
+        public void ExecuteRandomPart(out int addHealth, out int addEnergy, out List<string> add_Item, out List<string> add_Events)
         {
             float judge = Random.value;
 
             float IntervalMax = 0;
             float IntervalMin = 0;
 
-            for (int j = 0; j < random_modifies.Count; j++)
+            for (int j = 0; j < Random_modifies.Count; j++)
             {
-                RandomModify randomModify = random_modifies[j];
+                RandomModify randomModify = Random_modifies[j];
 
-                IntervalMax += randomModify.percentage;
+                IntervalMax += randomModify.Percentage;
 
                 //如果随机到了该modify则执行
                 if (judge >= IntervalMin && judge <= IntervalMax)
                 {
-                    randomModify.ExecuteModify(out addHealth, out addEnergy, out add_Item);
+                    randomModify.ExecuteModify(out addHealth, out addEnergy, out add_Item, out add_Events);
                     Debug.Log(judge + "  " + addHealth + "  " + addEnergy);
                     return;
                 }
@@ -278,6 +299,7 @@ namespace FE_EventInfo
             }
 
             add_Item = null;
+            add_Events = null;
             addHealth = 0;
             addEnergy = 0;
         }
@@ -285,13 +307,13 @@ namespace FE_EventInfo
         public override string ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();
-            if (random_modifies != null)
+            if (Random_modifies != null)
             {
-                for (int i = 0; i < random_modifies.Count; i++)
+                for (int i = 0; i < Random_modifies.Count; i++)
                 {
                     stringBuilder.Append(i);
                     stringBuilder.Append("random_modifies: ");
-                    stringBuilder.Append(random_modifies[i].ToString());
+                    stringBuilder.Append(Random_modifies[i].ToString());
                     stringBuilder.Append("\n");
                 }
             }
@@ -305,50 +327,69 @@ namespace FE_EventInfo
     /// </summary>
     public class RandomModify
     {
-        public float percentage;
+        [JsonProperty]
+        private float percentage;
+        [JsonProperty]
+        private int add_health;
+        [JsonProperty]
+        private int add_energy;
+        [JsonProperty]
+        private List<string> add_item;
+        [JsonProperty]
+        private List<string> add_events;
 
-        public int add_health;
-        public int add_energy;
-        public List<string> add_item;
-        public List<string> add_events;
+        public int Add_health { get => add_health;  }
+        public int Add_energy { get => add_energy;  }
+        public List<string> Add_item { get => add_item; }
+        public List<string> Add_events { get => add_events; }
+        public float Percentage { get => percentage; }
 
-        public void ExecuteModify(out int addHealth, out int addEnergy, out List<string> add_Item)
+        public void ExecuteModify(out int addHealth, out int addEnergy, out List<string> add_Item, out List<string> add_Event)
         {
-            add_Item = new List<string>();
-            if (add_item != null)
-                add_Item.AddRange(add_item);
-            addHealth = add_health;
-            addEnergy = add_energy;
+            add_Item = null;
+            add_Event = null;
+
+            //加入物品改变
+            add_Item = this.Add_item;
+
+            //加入事件符号改变
+            add_Event = this.Add_events;
+
+            addHealth = Add_health;
+            addEnergy = Add_energy;
         }
 
         public override string ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();
 
+            stringBuilder.Append("percentage: ");
+            stringBuilder.Append(percentage);
+            stringBuilder.Append("\n");
             stringBuilder.Append("add_health: ");
-            stringBuilder.Append(add_health);
+            stringBuilder.Append(Add_health);
             stringBuilder.Append("\n");
             stringBuilder.Append("add_energy: ");
-            stringBuilder.Append(add_energy);
+            stringBuilder.Append(Add_energy);
             stringBuilder.Append("\n");
 
-            if (add_item != null)
+            if (Add_item != null)
             {
-                for (int i = 0; i < add_item.Count; i++)
+                for (int i = 0; i < Add_item.Count; i++)
                 {
                     stringBuilder.Append(i);
                     stringBuilder.Append(" add_item: ");
-                    stringBuilder.Append(add_item[i]);
+                    stringBuilder.Append(Add_item[i]);
                     stringBuilder.Append("\n");
                 }
             }
-            if (this.add_events != null)
+            if (this.Add_events != null)
             {
-                for (int i = 0; i < add_events.Count; i++)
+                for (int i = 0; i < Add_events.Count; i++)
                 {
                     stringBuilder.Append(i);
                     stringBuilder.Append(" add_events: ");
-                    stringBuilder.Append(add_events[i]);
+                    stringBuilder.Append(Add_events[i]);
                     stringBuilder.Append("\n");
                 }
             }

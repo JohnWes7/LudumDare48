@@ -123,12 +123,34 @@ namespace FE_EventInfo
         [JsonProperty]
         private List<Option> options;
         public List<Option> Options { get => options; }
+        
+        public bool TryPrecondition(PlayerEventsStatistics playerEventsStatistics)
+        {
+            //如果没有Precondition
+            if (Precondition == null)
+            {
+                return true;
+            }
+
+            StringBuilder stringBuilder = new StringBuilder();
+            List<string> log = new List<string>();
+
+            bool judge = Precondition.Perform(playerEventsStatistics, this.Event_chain, out log);
+
+            //DEBUG
+            for (int i = 0; i < log.Count; i++)
+            {
+                stringBuilder.Append(log[i]);
+            }
+            Debug.Log(stringBuilder.ToString());
+
+            return judge;
+        }
 
         public void PrintSelf()
         {
             Debug.Log("id: " + Id + "\n" + "title: " + this.Event_title + "\ndescription: " + Description + "\nicon: " + Icon + "\nprecondition: " + (Precondition == null ? "null" : Precondition.ToString()) + "\nevent_chain: " + (Event_chain == null ? "null" : Event_chain));
         }
-
         public override string ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();

@@ -50,7 +50,6 @@ public class SingleDayManager : MonoBehaviour
     public void GenerateEvent(Transform parent)
     {
         int index = 0;
-        string id1;
 
         while (true)
         {
@@ -58,7 +57,7 @@ public class SingleDayManager : MonoBehaviour
             index = Random.Range(0, EventInfoManager.DayEventsCount);
 
             //判断能不能用
-            if (PlayerModel.TryEvent(index, out id1) && IsNOTRepeat(index))
+            if (PlayerModel.TryEvent(index) && IsNOTRepeat(index))
             {
                 break;
             }
