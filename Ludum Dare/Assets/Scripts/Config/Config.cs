@@ -9,6 +9,7 @@ public class Config
     public static string StartSceneName { get; } = "StartScene";
     public static string GameSceneName { get; } = "GameScene";
     public static string ESCPanelPath { get; } = "UI/Prefabs/ESCPanel";
+    public static string FE_common_directory_PATH { get; } = System.Environment.CurrentDirectory + "/FE_common";
     public static string EventInfoJsonPath { get; } = "Json/Events/fallendless_event";
     public static string EventInfoTextPath { get; } = "Json/localisation/FE_day_events_l_simp_chinese_l_english";
     public static string ItemInfoJsonPath { get; } = "Json/Items/fallendless_item";

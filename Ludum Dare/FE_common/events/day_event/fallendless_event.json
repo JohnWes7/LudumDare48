@@ -1,0 +1,1300 @@
+{
+    "DayEvents": [
+        {
+            "description": "Little_surprise.desc",
+            "event_title": "Little_surprise.title",
+            "icon": "Ls",
+            "id": "Little_surprise",
+            "options": [
+                {
+                    "add_energy": 8,
+                    "label": "Little_surprise.title.a",
+                    "done_label": "Little_surprise.a.done"
+                }
+            ]
+        },
+        {
+            "description": "Some_comfort.desc",
+            "event_title": "Some_comfort.title",
+            "icon": "Sc",
+            "id": "Some_comfort",
+            "options": [
+                {
+                    "add_health": 4,
+                    "label": "Some_comfort.title.a",
+                    "done_label": "Some_comfort.a.done"
+                }
+            ]
+        },
+        {
+            "description": "Inevitable_aging.desc",
+            "event_title": "Inevitable_aging.title",
+            "icon": "Ia",
+            "id": "Inevitable_aging",
+            "options": [
+                {
+                    "add_health": -5,
+                    "label": "Inevitable_aging.title.a",
+                    "done_label": "Inevitable_aging.a.done"
+                }
+            ]
+        },
+        {
+            "description": "Old_batteries.desc",
+            "event_title": "Old_batteries.title",
+            "icon": "Ob",
+            "id": "Old_batteries",
+            "options": [
+                {
+                    "add_energy": 15,
+                    "add_health": -9,
+                    "label": "Old_batteries.title.a",
+                    "done_label": "Old_batteries.a.done"
+                },
+                {
+                    "label": "Old_batteries.title.b",
+                    "done_label": "Old_batteries.b.done"
+                }
+            ]
+        },
+        {
+            "description": "Repair_station.desc",
+            "event_title": "Repair_station.title",
+            "icon": "Rs",
+            "id": "Repair_station",
+            "options": [
+                {
+                    "add_energy": -8,
+                    "add_health": 8,
+                    "label": "Repair_station.title.a",
+                    "done_label": "Repair_station.a.done"
+                },
+                {
+                    "label": "Repair_station.title.b",
+                    "done_label": "Repair_station.b.done"
+                }
+            ]
+        },
+        {
+            "description": "Military_repair_station.desc",
+            "event_title": "Military_repair_station.title",
+            "icon": "Mrs",
+            "id": "Military_repair_station",
+            "options": [
+                {
+                    "add_energy": -25,
+                    "add_health": 40,
+                    "label": "Military_repair_station.title.a",
+                    "done_label": "Military_repair_station.a.done"
+                },
+                {
+                    "label": "Military_repair_station.title.b",
+                    "done_label": "Military_repair_station.b.done"
+                }
+            ]
+        },
+        {
+            "description": "Mutant_animals_attack.desc",
+            "event_title": "Mutant_animals_attack.title",
+            "icon": "Maa",
+            "id": "Mutant_animals_attack",
+            "options": [
+                {
+                    "add_energy": -5,
+                    "label": "Mutant_animals_attack.title.a",
+                    "done_label": "Mutant_animals_attack.a.done"
+                },
+                {
+                    "add_health": -5,
+                    "label": "Mutant_animals_attack.title.b",
+                    "done_label": "Mutant_animals_attack.b.done"
+                },
+                {
+                    "add_energy": -7,
+                    "add_health": -6,
+                    "label": "Mutant_animals_attack.title.c",
+                    "done_label": "Mutant_animals_attack.c.done",
+                    "random_parts": [
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_item": [
+                                        "The_mouse_tail.add"
+                                    ],
+                                    "percentage": 0.3
+                                },
+                                {
+                                    "percentage": 0.7
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Found_coal_mine.desc",
+            "event_title": "Found_coal_mine.title",
+            "icon": "Fcm",
+            "id": "Found_coal_mine",
+            "options": [
+                {
+                    "add_health": -5,
+                    "label": "Found_coal_mine.title.a",
+                    "done_label": "Found_coal_mine.a.done",
+                    "random_parts": [
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.3
+                                },
+                                {
+                                    "add_energy": 6,
+                                    "percentage": 0.4
+                                },
+                                {
+                                    "add_energy": 9,
+                                    "percentage": 0.3
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "Found_coal_mine.title.b",
+                    "done_label": "Found_coal_mine.b.done"
+                }
+            ]
+        },
+        {
+            "description": "Discovery_of_oil.desc",
+            "event_title": "Discovery_of_oil.title",
+            "icon": "Doo",
+            "id": "Discovery_of_oil",
+            "options": [
+                {
+                    "add_energy": -10,
+                    "label": "Discovery_of_oil.title.a",
+                    "done_label": "Discovery_of_oil.a.done",
+                    "random_parts": [
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.1
+                                },
+                                {
+                                    "add_energy": 8,
+                                    "percentage": 0.2
+                                },
+                                {
+                                    "add_energy": 15,
+                                    "percentage": 0.3
+                                },
+                                {
+                                    "add_energy": 20,
+                                    "percentage": 0.3
+                                },
+                                {
+                                    "add_energy": 25,
+                                    "percentage": 0.1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "Discovery_of_oil.title.b",
+                    "done_label": "Discovery_of_oil.b.done"
+                }
+            ]
+        },
+        {
+            "description": "Locked_containers.desc",
+            "event_chain": "event_chain_washing_powder",
+            "event_title": "Locked_containers.title",
+            "icon": "Lc",
+            "id": "Locked_containers",
+            "options": [
+                {
+                    "label": "Locked_containers.title.a",
+                    "done_label": "Locked_containers.a.done",
+                    "add_item": [
+                        "Mysterious_Container.add"
+                    ],
+                    "add_event": [
+                        "Locked_containers"
+                    ]
+                },
+                {
+                    "label": "Locked_containers.title.b",
+                    "done_label": "Locked_containers.b.done",
+                    "add_event": [
+                        "Locked_containers",
+                        "event_chain_washing_powder.end"
+                    ]
+                },
+                {
+                    "add_health": -15,
+                    "add_item": [
+                        "Some_white_powder.add"
+                    ],
+                    "label": "Locked_containers.title.c",
+                    "done_label": "Locked_containers.c.done",
+                    "add_event": [
+                        "Locked_containers",
+                        "event_chain_washing_powder.end"
+                    ]
+                }
+            ],
+            "precondition": {
+                "NOR": {
+                    "has_event": [
+                        "Locked_containers",
+                        "event_chain_washing_powder.end"
+                    ]
+                }
+            }
+        },
+        {
+            "description": "Nuclear_material?.desc",
+            "event_chain": "event_chain_washing_powder",
+            "event_title": "Nuclear_material?.title",
+            "icon": "Nw",
+            "id": "Nuclear_material?",
+            "options": [
+                {
+                    "add_energy": -5,
+                    "add_item": [
+                        "A_container_for_storing_nuclear_weapons.add",
+                        "Mysterious_Container.lost"
+                    ],
+                    "label": "Nuclear_material?.title.a",
+                    "done_label": "Nuclear_material?.a.done",
+                    "add_event": [
+                        "Nuclear_material?"
+                    ]
+                },
+                {
+                    "label": "Nuclear_material?.title.b",
+                    "done_label": "Nuclear_material?.b.done",
+                    "add_event": [
+                        "Nuclear_material?",
+                        "event_chain_washing_powder.end"
+                    ]
+                }
+            ],
+            "precondition": {
+                "has_event": [
+                    "Locked_containers"
+                ],
+                "NOR": {
+                    "has_event": [
+                        "event_chain_washing_powder.end"
+                    ]
+                }
+            }
+        },
+        {
+            "description": "The_container_has_been_opened.desc",
+            "event_chain": "event_chain_washing_powder",
+            "event_title": "The_container_has_been_opened.title",
+            "icon": "Tco",
+            "id": "The_container_has_been_opened",
+            "options": [
+                {
+                    "add_item": [
+                        "A_bag_of_washing_powder.add",
+                        "A_container_for_storing_nuclear_weapons.lost"
+                    ],
+                    "label": "The_container_has_been_opened.title.a",
+                    "done_label": "The_container_has_been_opened.a.done",
+                    "add_event": [
+                        "The_container_has_been_opened",
+                        "event_chain_washing_powder.end"
+                    ]
+                }
+            ],
+            "precondition": {
+                "has_event": [
+                    "Nuclear_material?"
+                ],
+                "NOR": {
+                    "has_event": [
+                        "event_chain_washing_powder.end"
+                    ]
+                }
+            }
+        },
+        {
+            "description": "Personal_shelter.desc",
+            "event_chain": "event_chain_fallout",
+            "event_title": "Personal_shelter.title",
+            "icon": "Ps",
+            "id": "Personal_shelter",
+            "options": [
+                {
+                    "add_energy": -4,
+                    "add_item": [
+                        "Cheap_anti_radiation_drugs.add"
+                    ],
+                    "label": "Personal_shelter.title.a",
+                    "done_label": "Personal_shelter.a.done",
+                    "add_event": [
+                        "Personal_shelter"
+                    ]
+                },
+                {
+                    "label": "Personal_shelter.title.b",
+                    "done_label": "Personal_shelter.a.done",
+                    "add_event": [
+                        "Personal_shelter",
+                        "event_chain_fallout.end"
+                    ]
+                }
+            ],
+            "precondition": {
+                "NOR": {
+                    "has_event": [
+                        "Personal_shelter",
+                        "event_chain_fallout.end"
+                    ]
+                }
+            }
+        },
+        {
+            "description": "Freezing_room.desc",
+            "event_chain": "event_chain_fallout",
+            "event_title": "Freezing_room.title",
+            "icon": "Fr",
+            "id": "Freezing_room",
+            "options": [
+                {
+                    "add_energy": -8,
+                    "add_item": [
+                        "Silver_Cross.add"
+                    ],
+                    "label": "Freezing_room.title.a",
+                    "done_label": "Freezing_room.a.done",
+                    "add_event": [
+                        "Freezing_room"
+                    ]
+                },
+                {
+                    "label": "Freezing_room.title.b",
+                    "done_label": "Freezing_room.b.done",
+                    "add_event": [
+                        "Freezing_room",
+                        "event_chain_fallout.end"
+                    ]
+                }
+            ],
+            "precondition": {
+                "has_event": [
+                    "Personal_shelter"
+                ],
+                "NOR": {
+                    "has_event": [
+                        "event_chain_fallout.end"
+                    ]
+                }
+            }
+        },
+        {
+            "description": "A_watch.desc",
+            "event_chain": "event_chain_fallout",
+            "event_title": "A_watch.title",
+            "icon": "Aw",
+            "id": "A_watch",
+            "options": [
+                {
+                    "add_item": [
+                        "Beep_boy.add"
+                    ],
+                    "label": "A_watch.title.a",
+                    "done_label": "A_watch.a.done",
+                    "add_event": [
+                        "A_watch",
+                        "event_chain_fallout.end"
+                    ]
+                }
+            ],
+            "precondition": {
+                "has_event": [
+                    "Freezing_room"
+                ],
+                "NOR": {
+                    "has_event": [
+                        "event_chain_fallout.end"
+                    ]
+                }
+            }
+        },
+        {
+            "description": "Machine_maid.desc",
+            "event_chain": "event_chain_love_and_peace",
+            "event_title": "Machine_maid.title",
+            "icon": "Mm",
+            "id": "Machine_maid",
+            "options": [
+                {
+                    "add_energy": -5,
+                    "add_item": [
+                        "Memory_of_maid_robot.add"
+                    ],
+                    "label": "Machine_maid.title.a",
+                    "done_label": "Machine_maid.a.done",
+                    "add_event": [
+                        "Machine_maid"
+                    ]
+                },
+                {
+                    "label": "Machine_maid.title.b",
+                    "done_label": "Machine_maid.b.done",
+                    "add_event": [
+                        "Machine_maid",
+                        "event_chain_love_and_peace.end"
+                    ]
+                }
+            ],
+            "precondition": {
+                "NOR": {
+                    "has_event": [
+                        "Machine_maid"
+                    ]
+                }
+            }
+        },
+        {
+            "description": "Broken_war_droids.desc",
+            "event_chain": "event_chain_love_and_peace",
+            "event_title": "Broken_war_droids.title",
+            "icon": "Wd",
+            "id": "Broken_war_droids",
+            "options": [
+                {
+                    "add_energy": -5,
+                    "add_item": [
+                        "Memory_of_broken_war_droids.add"
+                    ],
+                    "label": "Broken_war_droids.title.a",
+                    "done_label": "Broken_war_droids.a.done",
+                    "add_event": [
+                        "Broken_war_droids"
+                    ]
+                },
+                {
+                    "label": "Broken_war_droids.title.b",
+                    "done_label": "Broken_war_droids.b.done",
+                    "add_event": [
+                        "Broken_war_droids",
+                        "event_chain_love_and_peace.end"
+                    ]
+                }
+            ],
+            "precondition": {
+                "has_event": [
+                    "Machine_maid"
+                ],
+                "NOR": {
+                    "has_event": [
+                        "event_chain_love_and_peace.end"
+                    ]
+                }
+            }
+        },
+        {
+            "description": "Destroyed_robots.desc",
+            "event_chain": "event_chain_love_and_peace",
+            "event_title": "Destroyed_robots.title",
+            "icon": "Dr",
+            "id": "Destroyed_robots",
+            "options": [
+                {
+                    "add_item": [
+                        "A_fragment_of_the_core_of_personality.add"
+                    ],
+                    "label": "Destroyed_robots.title.a",
+                    "done_label": "Destroyed_robots.a.done",
+                    "add_event": [
+                        "Destroyed_robots"
+                    ]
+                },
+                {
+                    "label": "Destroyed_robots.title.b",
+                    "done_label": "Destroyed_robots.b.done",
+                    "add_event": [
+                        "Destroyed_robots",
+                        "event_chain_love_and_peace.end"
+                    ]
+                }
+            ],
+            "precondition": {
+                "has_event": [
+                    "Broken_war_droids"
+                ],
+                "NOR": {
+                    "has_event": [
+                        "event_chain_love_and_peace.end"
+                    ]
+                }
+            }
+        },
+        {
+            "description": "Two_bodies.desc",
+            "event_chain": "event_chain_love_and_peace",
+            "event_title": "Two_bodies.title",
+            "icon": "Tb",
+            "id": "Two_bodies",
+            "options": [
+                {
+                    "add_item": [
+                        "Complete_personality_core.add",
+                        "A_fragment_of_the_core_of_personality.lost"
+                    ],
+                    "label": "Two_bodies.title.a",
+                    "done_label": "Two_bodies.a.done",
+                    "add_event": [
+                        "Two_bodies",
+                        "event_chain_love_and_peace.end"
+                    ]
+                }
+            ],
+            "precondition": {
+                "has_event": [
+                    "Destroyed_robots"
+                ],
+                "NOR": {
+                    "has_event": [
+                        "event_chain_love_and_peace.end"
+                    ]
+                }
+            }
+        },
+        {
+            "description": "Damaged_isotope_battery.desc",
+            "event_title": "Damaged_isotope_battery.title",
+            "icon": "Dib",
+            "id": "Damaged_isotope_battery",
+            "options": [
+                {
+                    "add_energy": 40,
+                    "add_health": -30,
+                    "label": "Damaged_isotope_battery.title.a",
+                    "done_label": "Damaged_isotope_battery.a.done"
+                },
+                {
+                    "label": "Damaged_isotope_battery.title.b",
+                    "done_label": "Damaged_isotope_battery.b.done"
+                },
+                {
+                    "add_energy": 20,
+                    "add_health": -18,
+                    "label": "Damaged_isotope_battery.title.c",
+                    "done_label": "Damaged_isotope_battery.c.done"
+                }
+            ]
+        },
+        {
+            "description": "Sharing_power_bank.desc",
+            "event_title": "Sharing_power_bank.title",
+            "icon": "Spb",
+            "id": "Sharing_power_bank",
+            "options": [
+                {
+                    "label": "Sharing_power_bank.title.a",
+                    "done_label": "Sharing_power_bank.a.done",
+                    "random_parts": [
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "Sharing_power_bank.title.b",
+                    "done_label": "Sharing_power_bank.b.done",
+                    "random_parts": [
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "Sharing_power_bank.title.c",
+                    "done_label": "Sharing_power_bank.c.done",
+                    "random_parts": [
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_energy": 2,
+                                    "percentage": 0.5
+                                },
+                                {
+                                    "add_health": -1,
+                                    "percentage": 0.5
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Satellite_not_yet_launched.desc",
+            "event_title": "Satellite_not_yet_launched.title",
+            "icon": "Snl",
+            "id": "Satellite_not_yet_launched",
+            "options": [
+                {
+                    "add_health": -20,
+                    "label": "Satellite_not_yet_launched.title.a",
+                    "done_label": "Satellite_not_yet_launched.a.done",
+                    "add_event": [
+                        "Satellite_not_yet_launched"
+                    ],
+                    "random_parts": [
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_item": [
+                                        "Documents_of_Internet_enterprises.add"
+                                    ],
+                                    "percentage": 0.2
+                                },
+                                {
+                                    "percentage": 0.8
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_item": [
+                                        "TV_station_documents.add"
+                                    ],
+                                    "percentage": 0.2
+                                },
+                                {
+                                    "percentage": 0.8
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_item": [
+                                        "Communications_company_documentation.add"
+                                    ],
+                                    "percentage": 0.2
+                                },
+                                {
+                                    "percentage": 0.8
+                                }
+                            ]
+                        },
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_item": [
+                                        "Navigation_setting_data_of_satellite.add"
+                                    ],
+                                    "percentage": 0.6
+                                },
+                                {
+                                    "percentage": 0.4
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "Satellite_not_yet_launched.title.b",
+                    "done_label": "Satellite_not_yet_launched.b.done",
+                    "add_event": [
+                        "Satellite_not_yet_launched"
+                    ]
+                },
+                {
+                    "add_energy": -5,
+                    "label": "Satellite_not_yet_launched.title.c",
+                    "done_label": "Satellite_not_yet_launched.c.done",
+                    "add_event": [
+                        "Satellite_not_yet_launched"
+                    ],
+                    "random_parts": [
+                        {
+                            "random_modifies": [
+                                {
+                                    "add_health": 5,
+                                    "percentage": 0.3
+                                },
+                                {
+                                    "add_health": 10,
+                                    "percentage": 0.4
+                                },
+                                {
+                                    "add_health": 15,
+                                    "percentage": 0.4
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "precondition": {
+                "NOR": {
+                    "has_event": [
+                        "Satellite_not_yet_launched"
+                    ]
+                }
+            }
+        }
+    ]
+}

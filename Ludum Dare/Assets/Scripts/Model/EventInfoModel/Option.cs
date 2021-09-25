@@ -15,32 +15,32 @@ namespace FE_EventInfo
         /// 单项选泽的文字
         /// </summary>
         [JsonProperty]
-        private string label;
+        private string label = null;
         /// <summary>
         /// 固定体力增加量（负数为扣除）
         /// </summary>
         [JsonProperty]
-        private int add_health;
+        private int add_health = 0;
         /// <summary>
         /// 固定能量增减量（负数为扣除）
         /// </summary>
         [JsonProperty]
-        private int add_energy;
+        private int add_energy = 0;
         /// <summary>
         /// 固定物品增减用(字符串表示 格式为 物品代码.lost/add)
         /// </summary>
         [JsonProperty]
-        private List<string> add_item;
+        private List<string> add_item = null;
         /// <summary>
         /// 增加固定事件判断代码
         /// </summary>
         [JsonProperty]
-        private List<string> add_event;
+        private List<string> add_event = null;
         /// <summary>
         /// 多次判定
         /// </summary>
         [JsonProperty]
-        private List<RandomPart> random_parts;
+        private List<RandomPart> random_parts = null;
 
         public string Label { get => label; }
         public int Add_health { get => add_health; }
@@ -162,7 +162,7 @@ namespace FE_EventInfo
                 }
                 else
                 {
-                    ItemName = itemInfo.ItemName.Split('#');
+                    ItemName = itemInfo.Item_Name.Split('#');
                 }
 
                 //gl 应该是 lost 获得 get
@@ -178,7 +178,7 @@ namespace FE_EventInfo
 
                 if (gl != null)
                 {
-                    if (gl == "get")
+                    if (gl == "add")
                     {
                         judgeget = true;
                         get += ItemName[language];
@@ -270,7 +270,7 @@ namespace FE_EventInfo
         /// 多个百分比
         /// </summary>
         [JsonProperty]
-        private List<RandomModify> random_modifies;
+        private List<RandomModify> random_modifies = null;
 
         public List<RandomModify> Random_modifies { get => random_modifies; }
 
@@ -328,15 +328,15 @@ namespace FE_EventInfo
     public class RandomModify
     {
         [JsonProperty]
-        private float percentage;
+        private float percentage = 0;
         [JsonProperty]
-        private int add_health;
+        private int add_health = 0;
         [JsonProperty]
-        private int add_energy;
+        private int add_energy = 0;
         [JsonProperty]
-        private List<string> add_item;
+        private List<string> add_item = null;
         [JsonProperty]
-        private List<string> add_events;
+        private List<string> add_events = null;
 
         public int Add_health { get => add_health;  }
         public int Add_energy { get => add_energy;  }

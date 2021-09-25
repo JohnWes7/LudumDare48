@@ -39,10 +39,10 @@ public class EventPanelController : MonoBehaviour
 
 
         //更改标题
-        Title.text = EventTextManage.GetText(Info.Event_title, language);
+        Title.text = TextManage.GetText(Info.Event_title, language);
 
         //更改描述
-        Desciption.text = EventTextManage.GetText(Info.Description, language);
+        Desciption.text = TextManage.GetText(Info.Description, language);
 
         //显示选项
         for (int i = 0; i < evenInfo.Options.Count; i++)

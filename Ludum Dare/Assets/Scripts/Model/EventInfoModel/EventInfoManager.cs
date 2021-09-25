@@ -103,25 +103,25 @@ namespace FE_EventInfo
     public class EventInfo
     {
         [JsonProperty]
-        private string id;
+        private string id = null;
         public string Id { get => id; }
         [JsonProperty]
-        private string event_title;
+        private string event_title = null;
         public string Event_title { get => event_title; }
         [JsonProperty]
-        private string description;
+        private string description = null;
         public string Description { get => description; }
         [JsonProperty]
-        private string icon;
+        private string icon = null;
         public string Icon { get => icon; }
         [JsonProperty]
-        private Precondition precondition;
+        private Precondition precondition = null;
         public Precondition Precondition { get => precondition; }
         [JsonProperty]
-        private string event_chain;
+        private string event_chain = null;
         public string Event_chain { get => event_chain; }
         [JsonProperty]
-        private List<Option> options;
+        private List<Option> options = null;
         public List<Option> Options { get => options; }
         
         public bool TryPrecondition(PlayerEventsStatistics playerEventsStatistics)
