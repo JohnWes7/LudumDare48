@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class Config
 {
+    public static Encoding Encoding = Encoding.UTF8;
+
     public static string HoriString { get; } = "Horizontal";
     public static string VerString { get; } = "Vertical";
     public static string StartSceneName { get; } = "StartScene";

@@ -20,11 +20,7 @@ public class StartPannelController : MonoBehaviour
         FE_EventInfo.EventInfoManager.ManuallyInit();
         FE_EventInfo.EventInfoManager.DEBUG();
 
-        FE_EventInfo.TextManage.ManuallyInit();
-        FE_EventInfo.TextManage.DEBUG();
-
-        ItemInfoManager.ManuallyInit();
-
+        
         //Debug.Log("streamingAssetsPath : " + Application.streamingAssetsPath);
         //Debug.Log("ApplicationBase : " + System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase);
         //Debug.Log(Application.dataPath);

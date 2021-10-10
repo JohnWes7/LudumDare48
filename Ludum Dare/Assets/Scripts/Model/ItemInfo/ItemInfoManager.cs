@@ -14,13 +14,6 @@ public class ItemInfoManager : Single<ItemInfoManager>
 
     public ItemInfoManager()
     {
-        //TODO:新版的物品读取
-
-        ////读取json
-        //string json = Resources.Load<TextAsset>(Config.ItemInfoJsonPath).text;
-        ////转换成list
-        //item_data = Tool.JSONString2Object<ItemData>(json);
-
         AddInfo(Config.FE_common_directory_PATH);
 
         #region debug
@@ -29,29 +22,41 @@ public class ItemInfoManager : Single<ItemInfoManager>
         #endregion
     }
 
-    public void AddInfo(string mod_path)
+    public void AddInfo(string mod_directory_path)
     {
         DirectoryInfo common_info = null;
 
         try
         {
-            common_info = new DirectoryInfo(mod_path + "/items");
+            if (Directory.Exists(mod_directory_path + "/items"))
+            {
+                common_info = new DirectoryInfo(mod_directory_path + "/items");
+            }
+            else
+            {
+                Debug.Log("文件夹不存在： " + mod_directory_path + "/items");
+                return;
+            }
         }
         catch (ArgumentNullException)
         {
             Debug.LogError("传入的字符串为空");
+            return;
         }
         catch (System.Security.SecurityException)
         {
             Debug.LogError("调用方没有所要求的权限。");
+            return;
         }
         catch (ArgumentException)
         {
             Debug.LogError("path 包含无效字符，例如 \"、<、> 或 |。");
+            return;
         }
         catch (PathTooLongException)
         {
             Debug.LogError("指定的路径和/或文件名超过了系统定义的最大长度。");
+            return;
         }
 
         FileInfo[] fileInfos = common_info.GetFiles("*.json");
@@ -62,6 +67,7 @@ public class ItemInfoManager : Single<ItemInfoManager>
             byte[] temp = new byte[file_stream.Length];
             file_stream.Read(temp, 0, (int)file_stream.Length);
             string json = System.Text.Encoding.UTF8.GetString(temp);
+            //TODO:物品读取转json
 
             Debug.Log(json);
         }

@@ -4,60 +4,103 @@ using UnityEngine;
 using LitJson;
 using System.Text;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace FE_EventInfo
 {
-    public class EventInfoManager : Single<EventInfoManager>
+    public class EventInfoManager : Single<EventInfoManager>, IAddInfo
     {
         /// <summary>
         /// 存有所有事件数据的工具类
         /// </summary>
-        private Events events;
-
+        private EventsData events_data;
         /// <summary>
         /// 整个事件列表的长度
         /// </summary>
-        public static int DayEventsCount { get { return Instance.events.DayEvents.Count; } }
+        public static int DayEventsCount { get { return Instance.events_data.DayEvents.Count; } }
+
 
         /// <summary>
         /// 构造函数
         /// </summary>
         public EventInfoManager()
         {
-            //读取json
-            string json = ReadTextFromResourcesJSON(Config.EventInfoJsonPath);
-            //将自己的json转入数据
-            Events default_event = null;
-            //default_event = JsonMapper.ToObject<Events>(json);
-            default_event = JsonConvert.DeserializeObject<Events>(json); //新版的插件读取可以读取到private
-
-            #region Debug打印
-            Debug.Log(json);
-            #endregion
-
-            this.events = default_event;
+            Debug.Log("event info 初始化");
+            //从common导入本体 （千万注意只能读取一次）
+            AddInfo(Config.FE_common_directory_PATH);
         }
 
-        public static void DEBUG()
-        {
-            StringBuilder log = new StringBuilder();
 
-            for (int i = 0; i < DayEventsCount; i++)
+        /// <summary>
+        /// 通过mod路径导入
+        /// </summary>
+        /// <param name="mod_directory_path"></param>
+        public void AddInfo(string mod_directory_path)
+        {
+            DirectoryInfo day_directoryInfo = null;
+
+            //打开文件夹
+            if (!Tool.OpenDirectory(mod_directory_path, "/events", out day_directoryInfo))
             {
-                log.Append(Instance.events.DayEvents[i].ToString());
-                log.Append("==========================================\n");
+                return;
+            } 
+
+            //递归找events下的所有json （因为就算分了类但是所有全部导入的类还是一个类 EventsData所以找全部）
+            List<FileInfo> fileInfos = Tool.GetAllFiles(day_directoryInfo, "*.json");
+            Debug.Log(day_directoryInfo.FullName + "中递归找到了" + fileInfos.Count + "个file");
+
+            for (int i = 0; i < fileInfos.Count; i++)
+            {
+                string json;
+                if (Tool.ReadText(fileInfos[i], out json, Config.Encoding))
+                {
+                    EventsData events = Tool.JSONString2Object<EventsData>(json);
+                    if (events != null)
+                    {
+                        //如果读取成功 全部导入
+                        this.AddInfo(events);
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// 将传入的event和静态类中的合体一起存放
+        /// </summary>
+        /// <param name="events"></param>
+        public void AddInfo(EventsData events)
+        {
+            Debug.Log("正在添加\n" + events.ToString());
+
+            if (this.events_data == null)
+            {
+                this.events_data = events;
+                return;
             }
 
-            Debug.Log(log.ToString());
+            this.events_data.AddInfo(events);
         }
-
-        public static string ReadTextFromResourcesJSON(string PATH)
+        /// <summary>
+        /// 可以泛型装 也许之后装载events的子类用来提取部分信息
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="info"></param>
+        public void AddInfo<T>(T info)
         {
-            //读取json
-            string json = Resources.Load<TextAsset>(PATH).text;
-            return json;
-        }
+            if (info is EventsData)
+            {
+                AddInfo(info as EventsData);
+                return;
+            }
 
+            Debug.LogError("错误将 info 装箱进 Events");
+        }
+        /// <summary>
+        /// DEBUG
+        /// </summary>
+        public static void DEBUG()
+        {
+            Debug.Log(Instance.events_data.ToString());
+        }
         /// <summary>
         /// 获取事件信息 默认获取
         /// </summary>
@@ -67,15 +110,14 @@ namespace FE_EventInfo
         {
             for (int i = 0; i < DayEventsCount; i++)
             {
-                if (Instance.events.DayEvents[i].Id == id)
+                if (Instance.events_data.DayEvents[i].Id == id)
                 {
-                    return Instance.events.DayEvents[i];
+                    return Instance.events_data.DayEvents[i];
                 }
             }
 
             return null;
         }
-
         /// <summary>
         /// 获取事件信息
         /// </summary>
@@ -85,7 +127,7 @@ namespace FE_EventInfo
         {
             if (index >= 0 && index < DayEventsCount)
             {
-                return Instance.events.DayEvents[index];
+                return Instance.events_data.DayEvents[index];
             }
 
             return null;
@@ -95,9 +137,34 @@ namespace FE_EventInfo
     /// <summary>
     /// 用来导入数据的工具类（json按照该类导入）
     /// </summary>
-    public class Events
+    public class EventsData
     {
         public List<EventInfo> DayEvents;
+
+        public void AddInfo(EventsData events)
+        {
+            if (events.DayEvents != null)
+            {
+                this.DayEvents.AddRange(events.DayEvents);
+            }
+            else
+            {
+                this.DayEvents = events.DayEvents;
+            }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder log = new StringBuilder();
+
+            for (int i = 0; i < this.DayEvents.Count; i++)
+            {
+                log.Append(this.DayEvents[i].ToString());
+                log.Append("==========================================\n");
+            }
+
+            return log.ToString();
+        }
     }
 
     public class EventInfo
