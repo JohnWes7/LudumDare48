@@ -1,4 +1,4 @@
-﻿using DG.Tweening;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -54,7 +54,7 @@ public class OptionsPanelController : MonoBehaviour
                 break;
         }
 
-        PlayerPrefs.SetInt("Resolution", value);
+        //PlayerPrefs.SetInt("Resolution", value);
     }
 
     public void LanguageChange(int value)

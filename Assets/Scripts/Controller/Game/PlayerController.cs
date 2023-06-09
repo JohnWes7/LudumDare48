@@ -192,7 +192,10 @@ public class PlayerController : MonoBehaviour
 
                 //完成跳转回调
                 //结束动画
-                GameManager.Instance.EndFadeAni(() => { Destroy(gameObject); });
+                GameManager.Instance.EndFadeAni(() => { 
+                    //结束manager
+                    GameManager.Instance.DestroySelf();
+                });
             });
 
         }, laber);
